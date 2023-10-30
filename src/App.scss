@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -35,4 +35,41 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 30px !important;
+  color: #b5b6ba !important;
+}
+
+@import "../css/Page/trust.scss";
+
+#support {
+  background-color: #f0fdf6;
+}
+.testimonial-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.testimonial-content {
+  display: flex;
+  align-items: center;
+}
+
+
+.modal-logo {
+  border-left: 1px solid #c5c6c9;
+  display: inline-block;
+  margin-left: 16px;
+}
+
+.testimonial-text{
+  padding: 0px 20px;
+}
+
+.slick-dots {
+  z-index: 0 !important;
 }
