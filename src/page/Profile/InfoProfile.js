@@ -30,7 +30,6 @@ export default function InfoProfile() {
   const handleUpload = (file) => {
     const formData = new FormData();
     formData.append("formFile", file);
-
     https
       .post(`/api/users/upload-avatar`, formData, {
         headers: {

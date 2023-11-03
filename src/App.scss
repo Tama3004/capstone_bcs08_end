@@ -46,12 +46,9 @@ body {
   color: #b5b6ba !important;
 }
 
-@import "../css/Page/trust.scss";
-
 #support {
   background-color: #f0fdf6;
 }
-
 
 .slick-dots {
   z-index: 0 !important;
@@ -61,6 +58,11 @@ body {
   background-color: green;
 }
 
+button:focus {
+  outline: none !important;
+}
+
+@import "../css/Page/trust.scss";
 @import "../css/Component/Header.scss";
 @import "../css/Component/Content.scss";
 @import "../css/component/Testimonial.scss";

@@ -64,11 +64,21 @@ export default function Header() {
           </a>
         </div>
         <div className="right_h space-x-10 flex items-center text-lg font-bold">
-          <NavLink href="">Fiverr Business</NavLink>
-          <NavLink href="">Explore</NavLink>
-          <NavLink href="">English</NavLink>
-          <NavLink href="">US$ USD</NavLink>
-          <NavLink href="">Become a Seller</NavLink>
+          <NavLink href="">
+            <button>Fiverr Business</button>
+          </NavLink>
+          <NavLink href="">
+            <button>Explore</button>
+          </NavLink>
+          <NavLink href="">
+            <button>English</button>
+          </NavLink>
+          <NavLink href="">
+            <button>US$ USD</button>
+          </NavLink>
+          <NavLink href="">
+            <button>Become a Seller</button>
+          </NavLink>
           <div>{renderUserNav()}</div>
         </div>
       </div>
