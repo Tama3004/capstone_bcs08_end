@@ -15,11 +15,10 @@ export default function HomePage() {
     <div>
       <Header />
       <CategoriesHeader />
-      {/* <CategoriesHeader /> */}
       <div className="relative">
         <SliderCard />
       </div>
-      <div className="absolute top-56 left-28 w-1/2">
+      <div className="slider-content">
         <Content />
       </div>
       <div id="trust">

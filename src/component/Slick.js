@@ -2,13 +2,15 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useMediaQuery } from "react-responsive";
 
 export default function Slick() {
+  const isMobile = useMediaQuery({ maxWidth: 480 });
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 5,
+    slidesToShow: isMobile ? 1 : 5,
+    slidesToScroll: isMobile ? 1 : 5,
   };
 
   return (

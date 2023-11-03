@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { https } from "../../api/config";
 import { NavLink, useParams } from "react-router-dom";
 import { getJobDetail } from "../../redux/Reducer/jobReducer";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 export default function Title() {
   let { id } = useParams();
@@ -59,16 +60,72 @@ export default function Title() {
         <p className="font-bold text-4xl pb-10">
           Most popular in {jobTitleDetail.tenLoaiCongViec}
         </p>
-        <div className="content grid grid-cols-10 gap-4">
-          <div className="border-2 col-span-2">
-            <p>Minimalist Logo Design</p>
+        <div className="content flex items-center space-x-5">
+          <div className="border-2 p-2 rounded-xl">
+            <div className="flex items-center space-x-3">
+              <img
+                className="h-16 w-16"
+                src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101614/Logo%20design_2x.png"
+                alt=""
+              />
+              <p className="font-bold">Minimalist Logo Design</p>
+              <span className="font-bold text-xl">
+                <AiOutlineArrowRight></AiOutlineArrowRight>
+              </span>
+            </div>
           </div>
-          <div className="border-2 col-span-2">
-            <p>Architecture & Interior Design</p>
+          <div className="border-2 p-2 rounded-xl">
+            <div className="flex items-center space-x-3">
+              <img
+                className="h-16 w-16"
+                src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101618/Architecture%20_%20Interior%20Design_2x.png"
+                alt=""
+              />
+              <p className="font-bold">Architecture & Interior Design</p>
+              <span className="font-bold text-xl">
+                <AiOutlineArrowRight></AiOutlineArrowRight>
+              </span>
+            </div>
           </div>
-          <div className="border-2 col-span-2">Image Editing</div>
-          <div className="border-2 col-span-2">NFT Art</div>
-          <div className="border-2 col-span-2">T-Shirts & Merchandise</div>
+          <div className="border-2 p-2 rounded-xl">
+            <div className="flex items-center space-x-3">
+              <img
+                className="h-16 w-16"
+                src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101624/Photoshop%20Editing_2x.png"
+                alt=""
+              />
+              <p className="font-bold">Image Editing</p>
+              <span className="font-bold text-xl">
+                <AiOutlineArrowRight></AiOutlineArrowRight>
+              </span>
+            </div>
+          </div>
+          <div className="border-2 p-2 rounded-xl">
+            <div className="flex items-center space-x-3">
+              <img
+                className="h-16 w-16"
+                src="https://fiverr-res.cloudinary.com/f_auto,q_auto/v1/attachments/generic_asset/asset/fc6c7b8c1d155625e7878252a09c4437-1653222039380/Nft%20Art%20%281%29.png"
+                alt=""
+              />
+              <p className="font-bold">NFT Art</p>
+              <span className="font-bold text-xl">
+                <AiOutlineArrowRight></AiOutlineArrowRight>
+              </span>
+            </div>
+          </div>
+          <div className="border-2 p-2 rounded-xl">
+            <div className="flex items-center space-x-3">
+              <img
+                className="h-16 w-16"
+                src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/97477f04af40de3aa1f8d6aa21f69725-1626179101623/T-Shirts%20_%20Merchandise_2x.png"
+                alt=""
+              />
+              <p className="font-bold">T-Shirts & Merchandise</p>
+              <span className="font-bold text-xl">
+                <AiOutlineArrowRight></AiOutlineArrowRight>
+              </span>
+            </div>
+          </div>
         </div>
         <div className="py-5">
           <p className="text-4xl font-bold">

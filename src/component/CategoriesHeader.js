@@ -26,7 +26,7 @@ export default function CategoriesHeader() {
 
   useEffect(() => {
     https
-      .get("/api/loai-cong-viec")
+      .get("/api/cong-viec/lay-menu-loai-cong-viec")
       .then((res) => {
         dispatch(getMenuLoaiCongViec(res.data.content));
         setLoaiCv(res.data.content);
@@ -40,7 +40,7 @@ export default function CategoriesHeader() {
       <div
         className={
           scrollPosition > 0 || location.pathname !== "/"
-            ? "transition-all delay-300 flex justify-between fixed z-20 top-24 left-0 right-0 px-44 py-2 border-b-2 border-t-2 bg-white"
+            ? "categoriesHeader transition-all delay-300 flex justify-between fixed z-20 top-24 left-0 right-0 px-44 py-2 border-b-2 border-t-2 bg-white"
             : "hidden"
         }
       >
@@ -54,5 +54,5 @@ export default function CategoriesHeader() {
       </div>
     );
   };
-  return renderMenuLoaiCv();
+  return <div className="h-categories">{renderMenuLoaiCv()}</div>;
 }

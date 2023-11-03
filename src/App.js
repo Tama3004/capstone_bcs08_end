@@ -5,6 +5,7 @@ import RegPage from "./page/Register/RegPage";
 import Layout from "./template/Layout";
 import HomePage from "./page/Home/HomePage";
 import Title from "./page/Title/Title";
+import Profile from "./page/Profile/Profile";
 
 function App() {
   return (
@@ -28,9 +29,7 @@ function App() {
               </Layout>
             }
           />
-          <Route
-            path="/title"
-          >
+          <Route path="/title">
             <Route
               path=":id"
               element={
@@ -40,6 +39,14 @@ function App() {
               }
             />
           </Route>
+          <Route
+            path="/profile"
+            element={
+              <Layout>
+                <Profile />
+              </Layout>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

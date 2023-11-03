@@ -29,7 +29,7 @@ export default function Header() {
     if (userLogin) {
       return (
         <div>
-          <NavLink>
+          <NavLink to="/profile">
             <button>{userLogin.user.name}</button>
           </NavLink>
         </div>
@@ -53,22 +53,24 @@ export default function Header() {
     <header
       className={
         scrollPosition > 0 || location.pathname !== "/"
-          ? "transition ease-in-out delay-150 m-auto w-full fixed z-10 left-0 right-0 flex justify-between items-center px-48 py-4 bg-white "
-          : "m-auto w-full fixed z-10 left-0 right-0 flex justify-between items-center px-48 py-4"
+          ? " header-active "
+          : " header"
       }
     >
-      <div>
-        <a className="font-bold text-4xl" href="/">
-          fiverr<span className="text-green-500 text-5xl">.</span>
-        </a>
-      </div>
-      <div className="space-x-10 flex items-center text-lg font-bold">
-        <NavLink href="">Fiverr Business</NavLink>
-        <NavLink href="">Explore</NavLink>
-        <NavLink href="">English</NavLink>
-        <NavLink href="">US$ USD</NavLink>
-        <NavLink href="">Become a Seller</NavLink>
-        <div>{renderUserNav()}</div>
+      <div className="container header-content">
+        <div className="left_h">
+          <a className="" href="/">
+            fiverr<span className="text-green-500 text-5xl">.</span>
+          </a>
+        </div>
+        <div className="right_h space-x-10 flex items-center text-lg font-bold">
+          <NavLink href="">Fiverr Business</NavLink>
+          <NavLink href="">Explore</NavLink>
+          <NavLink href="">English</NavLink>
+          <NavLink href="">US$ USD</NavLink>
+          <NavLink href="">Become a Seller</NavLink>
+          <div>{renderUserNav()}</div>
+        </div>
       </div>
     </header>
   );

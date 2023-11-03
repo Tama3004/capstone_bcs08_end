@@ -4,8 +4,8 @@ import { AiOutlineCheckCircle } from "react-icons/ai";
 export default function Support() {
   return (
     <div className="container py-20">
-      <div className="grid grid-cols-12 gap-16">
-        <div className="col-span-5 space-y-7">
+      <div className="grid lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-5 space-y-7 sm:col-span-1">
           <p className="text-5xl font-bold">
             A whole world of freelance talent at your fingertips
           </p>
@@ -60,7 +60,7 @@ export default function Support() {
             </li>
           </ul>
         </div>
-        <div className=" py-5 col-span-7">
+        <div className="py-5 lg:col-span-7 sm:col-span-1">
           <img src="https://demo5.cybersoft.edu.vn/img/selling.png" alt="" />
         </div>
       </div>

@@ -4,12 +4,13 @@ const { Search } = Input;
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 const Content = () => (
-  <div className="space-y-10 mr-52">
-    <p className="text-white text-6xl font-bold">
+  <div className="slider_text">
+    <p className="text-white lg:text-6xl font-bold">
       Find the perfect <i>freelance</i> services for your business
     </p>
     <Space className="w-full" direction="vertical">
       <Search
+      className="search_slider py-10"
         placeholder="Try 'building mobile app'"
         allowClear
         enterButton={
@@ -24,7 +25,7 @@ const Content = () => (
         onSearch={onSearch}
       />
     </Space>
-    <div className="text-white font-bold flex space-x-7 items-center">
+    <div className="text_slider text-white font-bold flex space-x-7 items-center">
       <p>Popular: </p>
       <div>
         <button className="rounded-3xl border-2 px-3 py-1">

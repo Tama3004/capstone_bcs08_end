@@ -4,7 +4,7 @@ export default function Market() {
   return (
     <div className="container py-20">
       <p className="text-4xl font-bold mb-10">Explore the marketplace</p>
-      <ul className="grid grid-cols-6 gap-10 justify-items-center">
+      <ul className="grid lg:grid-cols-6 grid-cols-2 gap-10 justify-items-center">
         <li className="col-span-1">
           <a className="flex flex-col items-center" href="">
             <img

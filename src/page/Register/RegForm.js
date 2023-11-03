@@ -150,7 +150,7 @@ export default function RegForm() {
             span: 12,
           }}
         >
-          <Button type="primary" className="bg-red-500" htmlType="submit">
+          <Button type="primary" htmlType="submit">
             Submit
           </Button>
         </Form.Item>

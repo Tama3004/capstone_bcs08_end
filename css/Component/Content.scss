@@ -1,0 +1,36 @@
+$mobile-max-width: 480px;
+
+.slider-content{
+position: absolute;
+top: 15rem;
+width: 50%;
+margin-left: 6rem;
+}
+
+.slider_img img{
+    width:100%;
+    height: 100%;
+    object-fit:cover;
+}
+
+
+@media only screen and (max-width: $mobile-max-width) {
+    .search_slider {
+      display: none;
+    }
+    .text_slider{
+        display: none;
+    }
+    .slider-content{
+        position: absolute;
+        top: 7rem;
+        width: 50%;
+        margin-left: 2rem;
+        width: 75%;
+        font-size: 2rem;
+        }
+    .slider_img img{
+        height: 20rem;
+        width: auto;
+    }
+}

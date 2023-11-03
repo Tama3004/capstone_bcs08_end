@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <div className="border-t-2">
       <footer className="container p-5">
-        <ul className="grid grid-cols-5 gap-5 py-5">
+        <ul className="grid lg:grid-cols-5 grid-cols-1 gap-5 py-5">
           <li>
             <p className="font-bold mb-5 text-lg">Categories</p>
             <div className="flex flex-col space-y-6 text-md">
@@ -84,9 +84,9 @@ export default function Footer() {
             </div>
           </li>
         </ul>
-        <div className="footer-end border-t-2 py-3 flex justify-between items-center">
-          <div className="footer-left flex space-x-4 items-center">
-            <span className="logo_footer">
+        <div className="footer-end border-t-2 py-3 flex-row lg:flex justify-between items-center">
+          <div className="footer-left flex-row justify-center text-center lg:flex space-x-4 items-center">
+            <span className="flex justify-center logo_footer">
               <svg
                 width="91"
                 height="27"
@@ -106,8 +106,8 @@ export default function Footer() {
               © Fiverr International Ltd. 2022
             </span>
           </div>
-          <div className="footer-right flex space-x-10">
-            <ul className="flex text-2xl space-x-10 items-center">
+          <div className="footer-right flex-row lg:flex space-x-10">
+            <ul className="flex justify-center text-2xl space-x-10 items-center">
               <li>
                 <button>
                   <AiFillFacebook></AiFillFacebook>

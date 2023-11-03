@@ -1,7 +1,7 @@
 import React from "react";
 import { Carousel } from "antd";
 const SliderCard = () => (
-  <div>
+  <div className="slider_img">
     <Carousel autoplay>
       <div>
         <img src="https://demo5.cybersoft.edu.vn/img/1.png" alt="" />
