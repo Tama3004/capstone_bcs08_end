@@ -12,7 +12,7 @@ export default function Categories() {
   let [categoriesTitle, setCategoriesTitle] = useState("");
   let [available, setAvailable] = useState(0);
 
-  const items = [
+  const dropdowmItems = [
     {
       label: <span className="text-green-500 font-medium">All Categories</span>,
       key: "1",
@@ -146,7 +146,7 @@ export default function Categories() {
           <div>
             <Dropdown
               menu={{
-                items,
+                dropdowmItems,
               }}
               trigger={["click"]}
               className=" text-black text-lg font-semibold"
@@ -162,7 +162,7 @@ export default function Categories() {
           <div>
             <Dropdown
               menu={{
-                items,
+                dropdowmItems,
               }}
               trigger={["click"]}
               className=" text-black text-lg font-semibold"
@@ -178,7 +178,7 @@ export default function Categories() {
           <div>
             <Dropdown
               menu={{
-                items,
+                dropdowmItems,
               }}
               trigger={["click"]}
               className=" text-black text-lg font-semibold"
@@ -194,7 +194,7 @@ export default function Categories() {
           <div>
             <Dropdown
               menu={{
-                items,
+                dropdowmItems,
               }}
               trigger={["click"]}
               className=" text-black text-lg font-semibold"
