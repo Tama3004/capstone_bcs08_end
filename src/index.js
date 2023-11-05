@@ -8,6 +8,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./redux/Reducer/userReducer";
 import jobReducer from "./redux/Reducer/jobReducer";
+import commentsReducer from "./redux/Reducer/commentsReducer";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -15,6 +16,7 @@ export let store = configureStore({
   reducer: {
     userReducer,
     jobReducer,
+    commentsReducer,
   },
 });
 root.render(

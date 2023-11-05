@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { https } from "../../api/config";
-import { render } from "@testing-library/react";
 import { Collapse, Rate } from "antd";
+import { useDispatch } from "react-redux";
+import {
+  setDanhGia,
+  setSaoCongViec,
+} from "../../redux/Reducer/commentsReducer";
 
 export default function ListPackage() {
   let { id } = useParams();
+  let dispatch = useDispatch();
   let [listPackage, setListPackage] = useState(null);
 
   const collapseItems = [
@@ -66,6 +71,16 @@ export default function ListPackage() {
         .then((res) => {
           console.log(res.data.content);
           setListPackage(res.data.content);
+          dispatch(setSaoCongViec(res.data.content[0].congViec.saoCongViec));
+          console.log(
+            "res.data.content[0].congViec.saoCongViec: ",
+            res.data.content[0].congViec.saoCongViec
+          );
+          dispatch(setDanhGia(res.data.content[0].congViec.danhGia));
+          console.log(
+            "res.data.content[0].congViec.danhGia: ",
+            res.data.content[0].congViec.danhGia
+          );
         })
         .catch((err) => {
           console.log(err);
@@ -99,9 +114,13 @@ export default function ListPackage() {
             <div className="seller-star-rating flex items-center">
               <p className="mr-2 text-gray-400">|</p>
               <div className="star flex items-center">
-                <Rate disabled defaultValue={item.congViec.saoCongViec} />
+                <Rate
+                  disabled
+                  value={item.congViec.saoCongViec}
+                  style={{ color: "orange" }}
+                />
               </div>
-              <div className="star-score font-bold text-orange-300 mx-1">
+              <div className="star-score font-bold text-orange-400 mx-1">
                 {item.congViec.saoCongViec}
               </div>
               <div className="rating font-medium">
@@ -148,11 +167,15 @@ export default function ListPackage() {
                   {item.tenNguoiTao}
                 </h3>
                 <p className="text-lg mb-1">{item.tenChiTietLoai}</p>
-                <div className="seller-star-rating flex align-items-center">
+                <div className="seller-star-rating flex items-center">
                   <div className="star flex items-center">
-                    <Rate disabled defaultValue={item.congViec.saoCongViec} />
+                    <Rate
+                      disabled
+                      value={item.congViec.saoCongViec}
+                      style={{ color: "orange" }}
+                    />
                   </div>
-                  <div className="star-score font-bold text-orange-300 mx-1">
+                  <div className="star-score font-bold text-orange-400 mx-1">
                     {item.congViec.saoCongViec}
                   </div>
                   <div className="rating font-medium">
