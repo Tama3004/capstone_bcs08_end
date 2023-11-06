@@ -5,8 +5,10 @@ import { https } from "../../api/config";
 import { setLogin } from "../../redux/Reducer/userReducer";
 import { userLocalStorage } from "../../api/localService";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 export default function LoginForm() {
+  const isMobile = useMediaQuery({ maxWidth: 480 });
   let dispatch = useDispatch();
   let navigate = useNavigate();
   const onFinish = (values) => {
@@ -75,20 +77,22 @@ export default function LoginForm() {
       </Form.Item>
 
       <Form.Item
+        className={isMobile ? "text-center" : ""}
         name="remember"
         valuePropName="checked"
         wrapperCol={{
-          offset: 8,
-          span: 16,
+          offset: isMobile ? 1 : 8,
+          span: isMobile ? 1 : 16,
         }}
       >
         <Checkbox>Remember me</Checkbox>
       </Form.Item>
 
       <Form.Item
+        className={isMobile ? "text-center" : ""}
         wrapperCol={{
-          offset: 8,
-          span: 16,
+          offset: isMobile ? 1 : 8,
+          span: isMobile ? 1 : 16,
         }}
       >
         <Button type="primary" className="bg-red-500" htmlType="submit">

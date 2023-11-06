@@ -96,8 +96,8 @@ export default function InfoProfile() {
             </Upload>
           </div>
           <p className="text-xl font-bold">{user.email}</p>
-          <Button className="border-none w-1" onClick={showModal}>
-            <span className="text-2xl">
+          <Button className="relative-button border-none w-2" onClick={showModal}>
+            <span className="absolute-span text-2xl text-center">
               <AiFillEdit></AiFillEdit>
             </span>
           </Button>

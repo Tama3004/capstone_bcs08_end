@@ -11,7 +11,7 @@ export default function Testimonial() {
 
   return (
     <div className="container">
-      <Slider {...settings} className="px-5 py-10">
+      <Slider {...settings} className="px-3 py-7 lg:px-5 lg:py-10">
         <div className="testimonial-slide">
           <div className="testimonial-content">
             <img

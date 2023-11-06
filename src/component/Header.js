@@ -1,6 +1,10 @@
+import { Button, ConfigProvider, Modal, Space } from "antd";
+import Search from "antd/es/input/Search";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { AiOutlineMenu } from "react-icons/ai";
+import { userLocalStorage } from "../api/localService";
 
 export default function Header() {
   // Get info from State and useState
@@ -11,6 +15,7 @@ export default function Header() {
 
   const [scrollPosition, setScrollPosition] = useState(0);
   const location = useLocation();
+  let navigate = useNavigate();
   useEffect(() => {
     const updatePosition = () => {
       if (location.pathname === "/") {
@@ -24,13 +29,38 @@ export default function Header() {
     return () => window.removeEventListener("scroll", updatePosition);
   }, [location.pathname]);
 
+  const onSearch = (value, _e, info) => console.log(info?.source, value);
+
+  //Mobile Dropdown
+  const [isModalOpen, setIsModalOpen] = useState([false, false]);
+  const toggleModal = (idx, target) => {
+    setIsModalOpen((p) => {
+      p[idx] = target;
+      return [...p];
+    });
+  };
+  //---------- END -------------
+  let handleLogOut = () => {
+    userLocalStorage.remove();
+    window.location.href = "/";
+  };
   // Render Nav
   let renderUserNav = () => {
     if (userLogin) {
       return (
         <div>
           <NavLink to="/profile">
-            <button>{userLogin.user.name}</button>
+            {userLogin.user.avatar !== "" ? (
+              <button>
+                <img
+                  className="h-16 w-16 rounded-full"
+                  src={userLogin.user.avatar}
+                  alt=""
+                />
+              </button>
+            ) : (
+              <button>{userLogin.user.name}</button>
+            )}
           </NavLink>
         </div>
       );
@@ -47,8 +77,8 @@ export default function Header() {
       );
     }
   };
-
   //---------- END -------------
+
   return (
     <header
       className={
@@ -58,10 +88,95 @@ export default function Header() {
       }
     >
       <div className="container header-content">
-        <div className="left_h">
-          <a className="" href="/">
-            fiverr<span className="text-green-500 text-5xl">.</span>
-          </a>
+        <div className="left_h space-x-5">
+          <div className="mobile-active flex space-x-2">
+            <div className="modal-headers">
+              <Space>
+                <Button type="primary" onClick={() => toggleModal(0, true)}>
+                  <span className="icon_modal text-2xl">
+                    <AiOutlineMenu></AiOutlineMenu>
+                  </span>
+                </Button>
+              </Space>
+              <Modal
+                title={
+                  userLogin !== null && userLogin.user !== "" ? (
+                    <div className="flex items-center space-x-2">
+                      <div>
+                        {userLogin.user.avatar !== "" ? (
+                          <img
+                            className="w-16 h-16 rounded-full"
+                            src={userLogin.user.avatar}
+                            alt=""
+                          />
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                      <div>
+                        <p>{userLogin.user.name}</p>
+                        <p>{userLogin.user.email}</p>
+                        <div className="space-x-4">
+                          <NavLink>
+                            <button onClick={handleLogOut}>Sign Out</button>
+                          </NavLink>
+                          <NavLink to="/profile">
+                            <button>Profile</button>
+                          </NavLink>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex space-x-5">
+                      <NavLink to="/login">
+                        <button>Sign In</button>
+                      </NavLink>
+                      <NavLink to="/register">
+                        <button>Sign Up</button>
+                      </NavLink>
+                    </div>
+                  )
+                }
+                open={isModalOpen[0]}
+                onCancel={() => toggleModal(0, false)}
+                footer=""
+              >
+                <div className="text_modal">
+                  <p className="text-green-500">Fiverr Pro</p>
+                  <hr />
+                  <p>Explore</p>
+                  <hr />
+                  <p>Message</p>
+                  <hr />
+                  <p>List</p>
+                  <hr />
+                  <p>Order</p>
+                  <hr />
+                  <p>Help & Resource</p>
+                </div>
+              </Modal>
+            </div>
+            <a className="" href="/">
+              fiverr<span className="text-green-500 text-5xl">.</span>
+            </a>
+          </div>
+          {scrollPosition > 0 || location.pathname !== "/" ? (
+            <Search
+              className="search-header"
+              placeholder="input search text"
+              allowClear
+              enterButton={
+                <Button
+                  style={{ backgroundColor: "green", borderColor: "green" }}
+                  type="primary"
+                >
+                  Search
+                </Button>
+              }
+              size="large"
+              onSearch={onSearch}
+            />
+          ) : null}
         </div>
         <div className="right_h space-x-10 flex items-center text-lg font-bold">
           <NavLink href="">

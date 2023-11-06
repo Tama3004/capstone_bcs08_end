@@ -12,7 +12,7 @@ import Footer from "../../component/Footer";
 
 export default function HomePage() {
   return (
-    <div>
+    <div className="w-screen">
       <Header />
       <CategoriesHeader />
       <div className="relative">

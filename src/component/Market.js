@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Market() {
   return (
-    <div className="container py-20">
+    <div className="container py-12 lg:py-20">
       <p className="text-4xl font-bold mb-10">Explore the marketplace</p>
       <ul className="grid lg:grid-cols-6 grid-cols-2 gap-10 justify-items-center">
         <li className="col-span-1">
