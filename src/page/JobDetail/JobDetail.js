@@ -9,12 +9,12 @@ export default function JobDetail() {
       <div className="flex flex-col lg:flex-row justify-between">
         <div className="lg:w-2/4">
           <ListPackage />
+          <Comment />
         </div>
         <div className="lg:w-1/3">
           <DetailPackage />
         </div>
       </div>
-      <Comment />
     </div>
   );
 }
