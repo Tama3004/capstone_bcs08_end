@@ -2,20 +2,30 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { https } from "../../api/config";
 import { useDispatch, useSelector } from "react-redux";
-import { getComments } from "../../redux/Reducer/commentsReducer";
-import { Progress, Rate } from "antd";
+import { setComments } from "../../redux/Reducer/commentsReducer";
+import { Progress, Rate, message } from "antd";
+import moment from "moment/moment";
 
 export default function Comment() {
   let { id } = useParams();
   let dispatch = useDispatch();
-  let { arrComments } = useSelector((state) => {
+
+  let { saoCongViec, danhGia, arrComments } = useSelector((state) => {
     return state.commentsReducer;
   });
 
-  let { saoCongViec, danhGia } = useSelector((state) => {
-    return state.commentsReducer;
+  let { userLogin } = useSelector((state) => {
+    return state.userReducer;
   });
-  let [searchInput, setSearchInput] = useState("");
+
+  let [postComment, setPostComment] = useState({
+    id: userLogin.user.id,
+    maCongViec: id,
+    maNguoiBinhLuan: 10,
+    ngayBinhLuan: moment().format("DD/MM/YYYY"),
+    noiDung: "",
+    saoBinhLuan: 3,
+  });
 
   useEffect(() => {
     let fetchDanhGiaData = () => {
@@ -33,7 +43,7 @@ export default function Comment() {
         .get(`/api/binh-luan/lay-binh-luan-theo-cong-viec/${id}`)
         .then((res) => {
           console.log(res.data.content);
-          dispatch(getComments(res.data.content));
+          dispatch(setComments(res.data.content));
         })
         .catch((err) => {
           console.log(err);
@@ -43,15 +53,29 @@ export default function Comment() {
     fetchBinhLuanData();
   }, [id]);
 
-  let handleChange = (e) => {
-    if (e.target.name == "search") {
-      setSearchInput(e.target.value);
-    }
+  let handleChangeForm = (e) => {
+    setPostComment({
+      ...postComment,
+      noiDung: e.target.value,
+    });
   };
 
-  let handleSearchOnclick = () => {
-    console.log(searchInput);
-    console.log(arrComments);
+  let handlePostComment = () => {
+    if (userLogin) {
+      // LỖI không post được:
+
+      // https
+      //   .post("/api/binh-luan", postComment)
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      console.log(postComment);
+    } else {
+      message.info("Vui lòng đăng nhập");
+    }
   };
 
   const renderItem = () => {
@@ -74,7 +98,7 @@ export default function Comment() {
               />
             )}
           </div>
-          <div className="reviewer-comment col-10">
+          <div className="reviewer-comment col-9">
             <div className="reviewer-name flex items-center mb-2">
               <h3 className="mr-2 text-gray-700 text-lg font-semibold">
                 {item.tenNguoiBinhLuan}
@@ -98,7 +122,7 @@ export default function Comment() {
                 {item.saoBinhLuan}
               </span>
             </div>
-            <div className="reviewer-country flex items-center mb-3">
+            <div className="reviewer-country flex items-center mb-4">
               <img
                 width={20}
                 height={20}
@@ -108,9 +132,58 @@ export default function Comment() {
               />
               <div class="country-name ms-2">Switzerland</div>
             </div>
-            <div className="comment">
-              <p className="mb-2 text-gray-600 text-lg">{item.noiDung}</p>
+            <div className="comment mb-3">
+              <p className="text-gray-600 text-lg">{item.noiDung}</p>
             </div>
+            <div class="reviewer-helpful flex items-center gap-2">
+              <div class="helpful-title text-gray-700 font-semibold">
+                Helpful?
+              </div>
+              <div class="helpful-thumb flex items-center gap-2">
+                <div class="yes flex items-center gap-1 cursor-pointer">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M11.89 14.75H1C0.59 14.75 0.25 14.41 0.25 14V8C0.25 7.59 0.59 7.25 1 7.25H3.46L6.05 0.72C6.16 0.43 6.44 0.25 6.75 0.25H7.67C8.59 0.25 9.34 0.98 9.34 1.87V5.45H13.17C14 5.45 14.78 5.84 15.27 6.48C15.73 7.1 15.87 7.87 15.66 8.6L14.39 12.93C14.08 13.99 13.06 14.74 11.9 14.74L11.89 14.75ZM4.75 13.25H11.89C12.38 13.25 12.81 12.95 12.94 12.52L14.21 8.19C14.32 7.81 14.16 7.52 14.06 7.39C13.85 7.12 13.53 6.96 13.16 6.96H8.58C8.17 6.96 7.83 6.62 7.83 6.21V1.87C7.83 1.81 7.76 1.75 7.66 1.75H7.25L4.74 8.08V13.25H4.75ZM1.75 13.25H3.25V8.75H1.75V13.25V13.25Z"></path>
+                  </svg>
+                  <span className="font-semibold">Yes</span>
+                </div>
+                <div class="no flex items-center gap-1 cursor-pointer">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M9.25533 14.75H8.33533C7.41533 14.75 6.66533 14.03 6.66533 13.13L6.66533 9.55H2.83533C2.00533 9.55 1.22533 9.16 0.735326 8.52C0.275326 7.9 0.135326 7.13 0.345326 6.4L1.62533 2.06C1.93533 1 2.95533 0.25 4.11533 0.25L15.0053 0.25C15.4153 0.25 15.7553 0.59 15.7553 1V7C15.7553 7.41 15.4153 7.75 15.0053 7.75H12.5453L9.95533 14.28C9.84533 14.57 9.56533 14.75 9.25533 14.75ZM4.11533 1.75C3.62533 1.75 3.19533 2.05 3.06533 2.48L1.79533 6.81C1.68533 7.19 1.84533 7.48 1.94533 7.61C2.15533 7.88 2.47533 8.04 2.84533 8.04H7.42533C7.83533 8.04 8.17533 8.38 8.17533 8.79L8.17533 13.12C8.17533 13.17 8.24533 13.24 8.34533 13.24H8.75533L11.2653 6.91V1.75L4.11533 1.75ZM12.7553 6.25H14.2553V1.75L12.7553 1.75V6.25Z"></path>
+                  </svg>
+                  <span className="font-semibold">No</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="reviewer-comment-del col-1">
+            <span className="cursor-pointer transition duration-200 hover:text-red-400">
+              <svg
+                className="svg-inline--fa fa-xing"
+                aria-hidden="true"
+                focusable="false"
+                data-prefix="fab"
+                data-icon="xing"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 384 512"
+                data-fa-i2svg
+              >
+                <path
+                  fill="currentColor"
+                  d="M162.7 210c-1.8 3.3-25.2 44.4-70.1 123.5-4.9 8.3-10.8 12.5-17.7 12.5H9.8c-7.7 0-12.1-7.5-8.5-14.4l69-121.3c.2 0 .2-.1 0-.3l-43.9-75.6c-4.3-7.8.3-14.1 8.5-14.1H100c7.3 0 13.3 4.1 18 12.2l44.7 77.5zM382.6 46.1l-144 253v.3L330.2 466c3.9 7.1.2 14.1-8.5 14.1h-65.2c-7.6 0-13.6-4-18-12.2l-92.4-168.5c3.3-5.8 51.5-90.8 144.8-255.2 4.6-8.1 10.4-12.2 17.5-12.2h65.7c8 0 12.3 6.7 8.5 14.1z"
+                />
+              </svg>
+            </span>
           </div>
         </li>
       );
@@ -122,7 +195,7 @@ export default function Comment() {
       <div className="rating-section mt-5">
         <div class="review-count lg:flex lg:justify-between">
           <div class="count flex items-center">
-            <h2 class="me-2 mb-1 text-black text-2xl font-bold">
+            <h2 class="me-2 mb-1 text-gray-800 text-2xl font-bold">
               {danhGia} Reviews
             </h2>
             <div className="star flex items-center">
@@ -229,7 +302,7 @@ export default function Comment() {
 
         <div class="col-sm-12 col-md-6">
           <div class="ranking">
-            <h1 className="text-black text-lg font-semibold mt-1 mb-3">
+            <h1 className="text-gray-800 text-lg font-semibold mt-1 mb-3">
               Rating Breakdown
             </h1>
             <ul>
@@ -310,21 +383,16 @@ export default function Comment() {
       </div>
 
       <div className="review-filter mt-5 p-5 border-b border-gray-400">
-        <h3 className="text-black text-2xl font-bold mb-7">Filters</h3>
+        <h3 className="text-gray-800 text-2xl font-bold mb-7">Filters</h3>
 
         <form className="search-form flex max-w-[350px]">
           <input
             className="w-[25rem] py-2 pr-[2px] pl-3 outline-none border border-gray-600 rounded-l-[4px] text-lg"
-            name="search"
             type="text"
+            name="search"
             placeholder="Search reviews"
-            onChange={handleChange}
           />
-          <button
-            type="button"
-            onClick={handleSearchOnclick}
-            className="bg-black rounded-r-[4px] py-2 px-4"
-          >
+          <button type="button" className="bg-black rounded-r-[4px] py-2 px-4">
             <span>
               <svg
                 className=" fill-white"
@@ -342,6 +410,43 @@ export default function Comment() {
 
       <div class="review-comment p-3">
         <ul className="review-comment-list">{renderItem()}</ul>
+      </div>
+
+      <div className="add-comment py-4">
+        <div className="comment-rating mb-4 flex items-center justify-between">
+          <h2 class="text-gray-800 text-2xl font-bold">Leave some comments</h2>
+          <div className="flex items-center gap-1">
+            <Rate
+              defaultValue={3}
+              onChange={(value) => {
+                setPostComment({
+                  ...postComment,
+                  saoBinhLuan: value ? value : 0,
+                });
+              }}
+            />
+            <h2 className="text-gray-800 text-2xl font-bold">Rating</h2>
+          </div>
+        </div>
+
+        <form>
+          <textarea
+            className="min-h-[6rem] w-full resize-y border border-gray-900 rounded-md py-2 px-3 text-gray-500"
+            required=""
+            name="noiDung"
+            id=""
+            cols="100"
+            rows="5"
+            onChange={handleChangeForm}
+          ></textarea>
+          <button
+            type="button"
+            class="comment-submit bg-green-500 rounded-md mt-2 text-white font-medium py-2 px-3"
+            onClick={handlePostComment}
+          >
+            Comment
+          </button>
+        </form>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ const commentsReducer = createSlice({
   name: "commentsReducer",
   initialState,
   reducers: {
-    getComments: (state, actions) => {
+    setComments: (state, actions) => {
       state.arrComments = actions.payload;
     },
     setSaoCongViec: (state, actions) => {
@@ -22,6 +22,6 @@ const commentsReducer = createSlice({
   },
 });
 
-export const { getComments, setSaoCongViec, setDanhGia } =
+export const { setComments, setSaoCongViec, setDanhGia } =
   commentsReducer.actions;
 export default commentsReducer.reducer;
