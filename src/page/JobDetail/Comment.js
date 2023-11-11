@@ -20,9 +20,9 @@ export default function Comment() {
   });
 
   const [postComment, setPostComment] = useState({
-    id: userLogin?.user.id,
+    id: 0,
     maCongViec: id,
-    maNguoiBinhLuan: 2881,
+    maNguoiBinhLuan: userLogin?.user.id,
     ngayBinhLuan: moment().format("DD/MM/YYYY"),
     noiDung: "",
     saoBinhLuan: 3,

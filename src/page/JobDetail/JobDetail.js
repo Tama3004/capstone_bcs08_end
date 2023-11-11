@@ -11,8 +11,10 @@ export default function JobDetail() {
           <ListPackage />
           <Comment />
         </div>
-        <div className="lg:w-1/3">
-          <DetailPackage />
+        <div className="lg:w-1/3 right-1 bottom-0 top-52 fixed hidden lg:block overflow-y-scroll">
+          <div className=" ">
+            <DetailPackage />
+          </div>
         </div>
       </div>
     </div>

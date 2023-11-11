@@ -5,8 +5,11 @@ import { Collapse, Rate } from "antd";
 import { useDispatch } from "react-redux";
 import {
   setDanhGia,
+  setGiaTien,
+  setMotaNgan,
   setSaoCongViec,
 } from "../../redux/Reducer/commentsReducer";
+import DetailPackage from "./DetailPackage";
 
 export default function ListPackage() {
   let { id } = useParams();
@@ -72,15 +75,9 @@ export default function ListPackage() {
           console.log(res.data.content);
           setListPackage(res.data.content);
           dispatch(setSaoCongViec(res.data.content[0].congViec.saoCongViec));
-          console.log(
-            "res.data.content[0].congViec.saoCongViec: ",
-            res.data.content[0].congViec.saoCongViec
-          );
           dispatch(setDanhGia(res.data.content[0].congViec.danhGia));
-          console.log(
-            "res.data.content[0].congViec.danhGia: ",
-            res.data.content[0].congViec.danhGia
-          );
+          dispatch(setGiaTien(res.data.content[0].congViec.giaTien));
+          dispatch(setMotaNgan(res.data.content[0].congViec.moTaNgan));
         })
         .catch((err) => {
           console.log(err);
@@ -139,6 +136,10 @@ export default function ListPackage() {
               src={item.congViec.hinhAnh}
               alt="..."
             />
+          </div>
+
+          <div className="block lg:hidden mt-5">
+            <DetailPackage />
           </div>
 
           <div class="job-description mt-5">
