@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setComments } from "../../redux/Reducer/commentsReducer";
 import { Progress, Rate, message } from "antd";
 import moment from "moment/moment";
+import { userLocalStorage } from "../../api/localService";
 
 export default function Comment() {
   let { id } = useParams();
@@ -18,10 +19,10 @@ export default function Comment() {
     return state.userReducer;
   });
 
-  let [postComment, setPostComment] = useState({
-    id: userLogin.user.id,
+  const [postComment, setPostComment] = useState({
+    id: userLogin?.user.id,
     maCongViec: id,
-    maNguoiBinhLuan: 10,
+    maNguoiBinhLuan: 2881,
     ngayBinhLuan: moment().format("DD/MM/YYYY"),
     noiDung: "",
     saoBinhLuan: 3,
@@ -62,16 +63,27 @@ export default function Comment() {
 
   let handlePostComment = () => {
     if (userLogin) {
-      // LỖI không post được:
-
-      // https
-      //   .post("/api/binh-luan", postComment)
-      //   .then((res) => {
-      //     console.log(res);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+      https
+        .post("/api/binh-luan", postComment, {
+          headers: {
+            token: userLocalStorage.get().token,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          https
+            .get(`/api/binh-luan/lay-binh-luan-theo-cong-viec/${id}`)
+            .then((res) => {
+              console.log(res.data.content);
+              dispatch(setComments(res.data.content));
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       console.log(postComment);
     } else {
       message.info("Vui lòng đăng nhập");
