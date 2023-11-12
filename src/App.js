@@ -7,6 +7,7 @@ import HomePage from "./page/Home/HomePage";
 import Title from "./page/Title/Title";
 import Categories from "./page/Categories/Categories";
 import JobDetail from "./page/JobDetail/JobDetail";
+import ProfilePage from "./page/Profile/ProfilePage";
 
 function App() {
   return (
@@ -56,6 +57,16 @@ function App() {
               element={
                 <Layout>
                   <JobDetail />
+                </Layout>
+              }
+            />
+          </Route>
+          <Route path="/profile">
+            <Route
+              path=":id"
+              element={
+                <Layout>
+                  <ProfilePage />
                 </Layout>
               }
             />

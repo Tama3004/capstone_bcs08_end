@@ -86,7 +86,7 @@ export default function Comment() {
         });
       console.log(postComment);
     } else {
-      message.info("Vui lòng đăng nhập");
+      message.warning("Yêu cầu đăng nhập!");
     }
   };
 

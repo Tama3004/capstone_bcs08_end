@@ -29,7 +29,7 @@ export default function Header() {
     if (userLogin) {
       return (
         <div>
-          <NavLink>
+          <NavLink to={`/profile/${userLogin.user.id}`}>
             <button>{userLogin.user.name}</button>
           </NavLink>
         </div>

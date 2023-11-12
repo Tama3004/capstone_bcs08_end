@@ -12,7 +12,7 @@ export default function Categories() {
   let [categoriesTitle, setCategoriesTitle] = useState("");
   let [available, setAvailable] = useState(0);
 
-  const dropdowmItems = [
+  const items = [
     {
       label: <span className="text-green-500 font-medium">All Categories</span>,
       key: "1",
@@ -138,7 +138,7 @@ export default function Categories() {
 
   return (
     <div className="py-28 container">
-      <div class="categories-title text-gray-800 text-4xl font-bold pt-3 pb-8">
+      <div class="categories-title text-black text-4xl font-bold pt-3 pb-8">
         <span>{categoriesTitle}</span>
       </div>
       <div className="categories-topbar">
@@ -146,10 +146,10 @@ export default function Categories() {
           <div>
             <Dropdown
               menu={{
-                dropdowmItems,
+                items,
               }}
               trigger={["click"]}
-              className=" text-gray-800 text-lg font-semibold"
+              className=" text-black text-lg font-semibold"
             >
               <Button className="rounded-sm py-0">
                 <Space>
@@ -162,10 +162,10 @@ export default function Categories() {
           <div>
             <Dropdown
               menu={{
-                dropdowmItems,
+                items,
               }}
               trigger={["click"]}
-              className=" text-gray-800 text-lg font-semibold"
+              className=" text-black text-lg font-semibold"
             >
               <Button className="rounded-sm py-0">
                 <Space>
@@ -178,10 +178,10 @@ export default function Categories() {
           <div>
             <Dropdown
               menu={{
-                dropdowmItems,
+                items,
               }}
               trigger={["click"]}
-              className=" text-gray-800 text-lg font-semibold"
+              className=" text-black text-lg font-semibold"
             >
               <Button className="rounded-sm py-0">
                 <Space>
@@ -194,10 +194,10 @@ export default function Categories() {
           <div>
             <Dropdown
               menu={{
-                dropdowmItems,
+                items,
               }}
               trigger={["click"]}
-              className=" text-gray-800 text-lg font-semibold"
+              className=" text-black text-lg font-semibold"
             >
               <Button className="rounded-sm py-0">
                 <Space>
