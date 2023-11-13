@@ -11,8 +11,10 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (!userLogin) {
-      window.location.href = "/login";
       message.warning("Yêu cầu đăng nhập!");
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 2000);
     }
   }, [userLogin]);
 
