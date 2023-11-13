@@ -29,6 +29,8 @@ export default function UserInfo() {
 
   let [infoSeller, setInfoSeller] = useState(null);
 
+  let [avatar, setAvatar] = useState(null);
+
   const getUserInfo = () => {
     https
       .get(`/api/users/${userLogin?.user.id}`)
@@ -55,7 +57,33 @@ export default function UserInfo() {
       //     });
     };
     fetchData();
-  }, []);
+  }, [userLogin]);
+
+  let handleChangeAvatar = (e) => {
+    let file = e.target.files;
+    console.log("🤣 ~ file: UserInfo.js:64 ~ handleChangeAvatar ~ file:", file);
+    let formData = new FormData();
+    formData.append("avatar", file);
+    console.log(
+      "🤣 ~ file: UserInfo.js:66 ~ handleChangeAvatar ~ formData:",
+      formData
+    );
+    // https
+    //   .post(`/api/users/upload-avatar`, formData, {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //       token: userLocalStorage.get().token,
+    //     },
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     console.log(formData);
+    //     console.log(file);
+    //   });
+  };
 
   return (
     <div className="info">
@@ -90,7 +118,12 @@ export default function UserInfo() {
                     <i class="las la-camera"></i>
                   </span>
                 </div>
-                <input className="label_inp hidden" type="file" />
+                <input
+                  className="label_inp hidden"
+                  type="file"
+                  ref={setAvatar}
+                  onChange={handleChangeAvatar}
+                />
                 <div className="image flex items-center justify-center bg-white text-white rounded-full w-full h-full">
                   {infoSeller?.avatar.length === 0 && (
                     <div className="rounded-full bg-gray-400 font-semibold text-white flex justify-center items-center w-40 h-40 border-[1px] border-gray-700">
@@ -109,11 +142,178 @@ export default function UserInfo() {
                 </div>
               </label>
             </div>
+            <div className="info_profile_label flex flex-col items-center">
+              <p className="text-gray-800 text-xl font-bold">
+                {infoSeller?.email}
+              </p>
+              <div className="btn_update">
+                <div className="edit text-gray-400 hover:text-black cursor-pointer">
+                  <i class="fa-sharp fa-solid fa-pen"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="info_desc border-t border-gray-300 mt-6 pt-4">
+            <div className="location flex justify-between mb-3">
+              <div className="location_left text-gray-500">
+                <i className="las la-map-marker-alt icon mr-3" />
+                <span>From</span>
+              </div>
+              <div className="location_right text-gray-600 font-bold">
+                <span>Vietnam</span>
+              </div>
+            </div>
+            <div className="location flex justify-between mb-4">
+              <div className="location_left text-gray-500">
+                <i class="fa-solid fa-user icon mr-3"></i>
+                <span>Member since</span>
+              </div>
+              <div className="location_right text-gray-600 font-bold">
+                <span className="text">Oct2022</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="info_sellercard_bottom">card bottom</div>
+      <div className="info_sellercard_bottom text-gray-500 leading-[2]">
+        <div className="info_card bg-white p-7 border border-gray-500">
+          <div className="inner_item border-b border-gray-300 mb-8 pb-3">
+            <div className="inner_row flex items-center justify-between">
+              <h3 className="text-gray-800 font-bold text-lg">Description</h3>
+              <div className="edit text-gray-400 hover:text-black cursor-pointer">
+                <i class="fa-sharp fa-solid fa-pen"></i>
+              </div>
+            </div>
+            <div className="flex items-center gap-14 pb-3">
+              <h6 className="w-[40%] font-light text-lg text-gray-600">
+                Name:
+              </h6>
+              <p class="lorem mb-1 text-base">{infoSeller?.name}</p>
+            </div>
+            <div className="flex items-center gap-14 pb-3">
+              <h6 className="w-[40%] font-light text-lg text-gray-600">
+                Phone:
+              </h6>
+              <p class="lorem mb-1 text-base">{infoSeller?.phone}</p>
+            </div>
+            <div className="flex items-center gap-14 pb-3">
+              <h6 className="w-[40%] font-light text-lg text-gray-600">
+                Birthday:
+              </h6>
+              <p class="lorem mb-1 text-base">{infoSeller?.birthday}</p>
+            </div>
+          </div>
+
+          <div className="inner_item border-b border-gray-300 mb-8 pb-3">
+            <div className="inner_row">
+              <h3 className="text-gray-800 font-bold text-lg">Language</h3>
+              <p class="lorem pt-1 mb-2 text-gray-600">
+                English - <span className="text-gray-400">Basic</span>
+              </p>
+              <p class="lorem pt-2 mb-2 text-gray-600">
+                Vietnamese (Tiếng Việt) -{" "}
+                <span className="text-gray-400">Native/Bilingual</span>
+              </p>
+            </div>
+          </div>
+
+          <div className="inner_item border-b border-gray-300 mb-8 pb-3">
+            <div className="inner_row flex items-center justify-between">
+              <h3 className="text-gray-800 font-bold text-lg">Skills</h3>
+              <div className="edit text-gray-400 hover:text-black cursor-pointer">
+                <i class="fa-sharp fa-solid fa-pen"></i>
+              </div>
+            </div>
+            <p class="lorem pt-2 mb-2 text-gray-600">{infoSeller?.skill}</p>
+          </div>
+          <div className="inner_item border-b border-gray-300 mb-8 pb-3">
+            <div className="inner_row flex items-center justify-between">
+              <h3 className="text-gray-800 font-bold text-lg">Education</h3>
+              <div className="edit text-gray-400 hover:text-black cursor-pointer">
+                <i class="fa-sharp fa-solid fa-pen"></i>
+              </div>
+            </div>
+            <p class="lorem pt-2 mb-2 text-gray-600">CYPERSOFT</p>
+          </div>
+          <div className="inner_item border-b border-gray-300 mb-8 pb-3">
+            <div className="inner_row flex items-center justify-between">
+              <h3 className="text-gray-800 font-bold text-lg">Certification</h3>
+              <div className="edit text-gray-400 hover:text-black cursor-pointer">
+                <i class="fa-sharp fa-solid fa-pen"></i>
+              </div>
+            </div>
+            <p class="lorem pt-2 mb-2 text-gray-600">
+              {infoSeller?.certification}
+            </p>
+          </div>
+
+          <div className="inner_item mb-8 pb-3">
+            <div className="inner_row">
+              <h3 className="text-gray-800 font-bold text-lg">
+                Linked Accounts
+              </h3>
+              <ul className="flex flex-col mt-2 text-gray-800">
+                <li className="flex items-center mb-1 gap-3">
+                  <i class="fa-brands fa-facebook"></i>
+                  <a
+                    href="#facebook"
+                    className="no-underline hover:no-underline text-blue-500 cursor-pointer"
+                  >
+                    Facebook
+                  </a>
+                </li>
+                <li className="flex items-center mb-1 gap-3">
+                  <i class="fa-brands fa-google"></i>
+                  <a
+                    href="#google"
+                    className="no-underline hover:no-underline text-blue-500 cursor-pointer"
+                  >
+                    Google
+                  </a>
+                </li>
+                <li className="flex items-center mb-1 gap-3">
+                  <i class="fa-brands fa-github"></i>
+                  <a
+                    href="#github"
+                    className="no-underline hover:no-underline text-blue-500 cursor-pointer"
+                  >
+                    Github
+                  </a>
+                </li>
+                <li className="flex items-center mb-1 gap-3">
+                  <i class="fa-brands fa-twitter"></i>
+                  <a
+                    href="#twitter"
+                    className="no-underline hover:no-underline text-blue-500 cursor-pointer"
+                  >
+                    Twitter
+                  </a>
+                </li>
+                <li className="flex items-center mb-1 gap-3">
+                  <i class="fa-sharp fa-solid fa-plus"></i>
+                  <a
+                    href="#dirbble"
+                    className="no-underline hover:no-underline text-blue-500 cursor-pointer"
+                  >
+                    Dirbble
+                  </a>
+                </li>
+                <li className="flex items-center mb-1 gap-3">
+                  <i class="fa-sharp fa-solid fa-plus"></i>
+                  <a
+                    href="#stackoverflow"
+                    className="no-underline hover:no-underline text-blue-500 cursor-pointer"
+                  >
+                    Stack Overflow
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
