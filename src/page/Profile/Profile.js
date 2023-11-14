@@ -5,10 +5,15 @@ import { useMediaQuery } from "react-responsive";
 
 export default function () {
   const isMobile = useMediaQuery({ maxWidth: 480 });
+  const isIpad = useMediaQuery({ maxWidth: 960 });
   return (
     <div
       className={
-        isMobile ? "container" : "container flex space-x-10"
+        isMobile
+          ? "container"
+          : isIpad
+          ? "container flex-row"
+          : "container flex space-x-10"
       }
     >
       <InfoProfile />

@@ -85,7 +85,7 @@ export default function Footer() {
           </li>
         </ul>
         <div className="footer-end border-t-2 py-3 flex-row lg:flex justify-between items-center">
-          <div className="footer-left flex-row justify-center text-center lg:flex space-x-4 items-center">
+          <div className="footer-left flex-row justify-center text-center lg:flex lg:space-x-4 items-center">
             <span className="flex justify-center logo_footer">
               <svg
                 width="91"
@@ -106,7 +106,7 @@ export default function Footer() {
               © Fiverr International Ltd. 2022
             </span>
           </div>
-          <div className="footer-right flex-row lg:flex space-x-10">
+          <div className="footer-right flex-row lg:flex lg:space-x-10">
             <ul className="flex justify-center text-2xl space-x-10 items-center">
               <li>
                 <button>
@@ -129,11 +129,13 @@ export default function Footer() {
                 </button>
               </li>
             </ul>
-            <button>English</button>
-            <button>US$ USD</button>
-            <button>
-              <BsFillPersonFill></BsFillPersonFill>
-            </button>
+            <div className="flex justify-center items-center gap-5">
+              <button>English</button>
+              <button>US$ USD</button>
+              <button>
+                <BsFillPersonFill></BsFillPersonFill>
+              </button>
+            </div>
           </div>
         </div>
       </footer>

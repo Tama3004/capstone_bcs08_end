@@ -19,6 +19,7 @@ import { useMediaQuery } from "react-responsive";
 
 export default function InfoProfile() {
   const isMobile = useMediaQuery({ maxWidth: 480 });
+  const isIpad = useMediaQuery({ maxWidth: 960 });
   let dispatch = useDispatch();
   let { user } = useSelector((state) => {
     return state.userReducer.userLogin;
@@ -76,7 +77,7 @@ export default function InfoProfile() {
   const { Option } = Select;
 
   return (
-    <div className={isMobile ? "w-full" : "w-1/3"}>
+    <div className={isMobile || isIpad ? "w-full" : "w-1/3"}>
       <div className="border-2 p-4 mb-5">
         <div className="flex-col justify-center items-center text-center">
           <div>

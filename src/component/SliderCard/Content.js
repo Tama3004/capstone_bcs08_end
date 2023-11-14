@@ -10,7 +10,7 @@ const Content = () => (
     </p>
     <Space className="w-full" direction="vertical">
       <Search
-      className="search_slider py-10"
+      className="search_slider lg:py-10"
         placeholder="Try 'building mobile app'"
         allowClear
         enterButton={

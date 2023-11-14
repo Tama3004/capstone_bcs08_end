@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getJobRent } from "../../redux/Reducer/jobReducer";
 import { message } from "antd";
 import { userLocalStorage } from "../../api/localService";
+import { NavLink, useParams } from "react-router-dom";
 
 export default function RentProfile() {
   let dispatch = useDispatch();
+  let params = useParams();
   let { JobRent } = useSelector((state) => {
     return state.jobReducer;
   });
@@ -52,7 +54,20 @@ export default function RentProfile() {
                 </p>
                 <p className="py-3 text-lg">{item.congViec.moTaNgan}</p>
                 <div className="flex justify-between">
-                  <div className="flex space-x-3">
+                  <div className="flex items-center space-x-3">
+                    <span className="star">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 1792 1792"
+                        width={15}
+                        height={15}
+                      >
+                        <path
+                          fill="#ffbe5b"
+                          d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
+                        />
+                      </svg>
+                    </span>
                     <p>{item.congViec.saoCongViec}</p>
                     <p>({item.congViec.danhGia})</p>
                   </div>
@@ -63,9 +78,11 @@ export default function RentProfile() {
               </div>
             </div>
             <div className="flex justify-end space-x-5 px-4 pb-2">
-              <button className="border-2 py-2 px-3 bg-green-500 text-white rounded-lg font-bold">
-                View Detail
-              </button>
+              <NavLink to={`/jobDetail/${item.congViec.id}`}>
+                <button className="border-2 py-2 px-3 bg-green-500 text-white rounded-lg font-bold">
+                  View Detail
+                </button>
+              </NavLink>
               <button
                 onClick={() => {
                   handleDelete(item.id);
@@ -81,7 +98,7 @@ export default function RentProfile() {
     });
   };
   return (
-    <div className="w-2/3">
+    <div className="md:w-full lg:w-2/3">
       <div className="flex py-4 px-5 border-2 justify-between items-center">
         <p className="text-2xl font-bold">
           It seems that you don't have any active Gigs.

@@ -30,7 +30,7 @@ export default function Title() {
   const renderItem = () => {
     return jobTitleDetail.dsNhomChiTietLoai?.map((item, index) => {
       return (
-        <div className="item" key={index}>
+        <div className="item w-96" key={index}>
           <img className="h-56 w-96 rounded-xl" src={item.hinhAnh} alt="..." />
           <p className="font-bold text-2xl py-6">{item.tenNhom}</p>
           {item.dsChiTietLoai.map((chiTiet, index) => {
@@ -50,7 +50,9 @@ export default function Title() {
   return (
     <div>
       <div className="flex flex-col justify-center items-center bg-green-950 text-white py-28 space-y-5">
-        <p className="font-bold text-5xl text-center">{jobTitleDetail.tenLoaiCongViec}</p>
+        <p className="font-bold text-5xl text-center">
+          {jobTitleDetail.tenLoaiCongViec}
+        </p>
         <p className="text-2xl">Designs to make you stand out.</p>
         <button className="border-2 rounded-xl py-2 px-3">
           How Fiverr Works
@@ -131,7 +133,9 @@ export default function Title() {
           <p className="text-4xl font-bold">
             Explore {jobTitleDetail.tenLoaiCongViec}
           </p>
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 py-10">{renderItem()}</div>
+          <div className="flex flex-wrap gap-5 py-10 lg:justify-start md:justify-center items-center">
+            {renderItem()}
+          </div>
         </div>
         <div>
           <p className="text-center text-3xl font-bold pb-5">
@@ -147,16 +151,24 @@ export default function Title() {
             <span className="border-2 rounded-2xl py-1 px-2">
               Mascot logo design
             </span>
-            <span className="border-2 rounded-2xl py-1 px-2">3d logo design</span>
+            <span className="border-2 rounded-2xl py-1 px-2">
+              3d logo design
+            </span>
             <span className="border-2 rounded-2xl py-1 px-2">
               Hand drawn logo design
             </span>
             <span className="border-2 rounded-2xl py-1 px-2">
               Vintage logo design
             </span>
-            <span className="border-2 rounded-2xl py-1 px-2">Remove background</span>
-            <span className="border-2 rounded-2xl py-1 px-2">Photo restoration</span>
-            <span className="border-2 rounded-2xl py-1 px-2">Photo retouching</span>
+            <span className="border-2 rounded-2xl py-1 px-2">
+              Remove background
+            </span>
+            <span className="border-2 rounded-2xl py-1 px-2">
+              Photo restoration
+            </span>
+            <span className="border-2 rounded-2xl py-1 px-2">
+              Photo retouching
+            </span>
             <span className="border-2 rounded-2xl py-1 px-2">Image resize</span>
             <span className="border-2 rounded-2xl py-1 px-2">
               Product label design

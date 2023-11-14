@@ -40,14 +40,14 @@ export default function CategoriesHeader() {
       <div
         className={
           scrollPosition > 0 || location.pathname !== "/"
-            ? "categoriesHeader transition-all delay-300 flex justify-between fixed z-20 top-24 left-0 right-0 px-44 py-2 border-b-2 border-t-2 bg-white"
+            ? "categoriesHeader transition-all delay-300 flex flex-wrap justify-between items-center lg:gap-3 md:gap-3 fixed z-20 top-24 left-0 right-0 border-b-2 border-t-2 bg-white"
             : "hidden"
         }
       >
         {LoaiCv.map((item, index) => {
           return (
             <NavLink to={`/title/${item.id}`} key={index}>
-              <button className="text-lg">{item.tenLoaiCongViec}</button>
+              <button className="text-center lg:text-lg md:text-xs">{item.tenLoaiCongViec}</button>
             </NavLink>
           );
         })}

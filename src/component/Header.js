@@ -1,10 +1,12 @@
-import { Button, ConfigProvider, Modal, Space } from "antd";
+import { Button, ConfigProvider, Dropdown, Modal, Space } from "antd";
 import Search from "antd/es/input/Search";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import { userLocalStorage } from "../api/localService";
+import { DownOutlined } from "@ant-design/icons";
+import { useMediaQuery } from "react-responsive";
 
 export default function Header() {
   // Get info from State and useState
@@ -12,7 +14,6 @@ export default function Header() {
     return state.userReducer;
   });
   //---------- END -------------
-
   const [scrollPosition, setScrollPosition] = useState(0);
   const location = useLocation();
   let navigate = useNavigate();
@@ -44,24 +45,51 @@ export default function Header() {
     userLocalStorage.remove();
     window.location.href = "/";
   };
+
   // Render Nav
   let renderUserNav = () => {
     if (userLogin) {
+      // User Options
+      const items = [
+        {
+          label: <NavLink to="/profile">Profile</NavLink>,
+          key: "0",
+        },
+        {
+          label: (
+            <NavLink to="/" onClick={handleLogOut}>
+              <button>Sign Out</button>
+            </NavLink>
+          ),
+          key: "2",
+        },
+      ];
+      // END
       return (
         <div>
-          <NavLink to="/profile">
-            {userLogin.user.avatar !== "" ? (
-              <button>
-                <img
-                  className="h-16 w-16 rounded-full"
-                  src={userLogin.user.avatar}
-                  alt=""
-                />
-              </button>
-            ) : (
-              <button>{userLogin.user.name}</button>
-            )}
-          </NavLink>
+          <Dropdown
+            menu={{
+              items,
+            }}
+            trigger={["click"]}
+          >
+            <a onClick={(e) => e.preventDefault()}>
+              <Space>
+                {userLogin.user.avatar !== "" ? (
+                  <button>
+                    <img
+                      className="h-16 w-16 rounded-full"
+                      src={userLogin.user.avatar}
+                      alt=""
+                    />
+                  </button>
+                ) : (
+                  <button>{userLogin.user.name}</button>
+                )}
+                <DownOutlined />
+              </Space>
+            </a>
+          </Dropdown>
         </div>
       );
     } else {
@@ -178,23 +206,25 @@ export default function Header() {
             />
           ) : null}
         </div>
-        <div className="right_h space-x-10 flex items-center text-lg font-bold">
-          <NavLink href="">
-            <button>Fiverr Business</button>
-          </NavLink>
-          <NavLink href="">
-            <button>Explore</button>
-          </NavLink>
-          <NavLink href="">
-            <button>English</button>
-          </NavLink>
-          <NavLink href="">
-            <button>US$ USD</button>
-          </NavLink>
-          <NavLink href="">
-            <button>Become a Seller</button>
-          </NavLink>
-          <div>{renderUserNav()}</div>
+        <div className="right_h space-x-10 flex items-center md:text-sm lg:text-lg font-bold">
+          <div className="flex gap-5 rh-content">
+            <NavLink href="">
+              <button>Fiverr Business</button>
+            </NavLink>
+            <NavLink href="">
+              <button>Explore</button>
+            </NavLink>
+            <NavLink href="">
+              <button>English</button>
+            </NavLink>
+            <NavLink href="">
+              <button>US$ USD</button>
+            </NavLink>
+            <NavLink href="">
+              <button>Become a Seller</button>
+            </NavLink>
+          </div>
+          <div className="avatarIcon">{renderUserNav()}</div>
         </div>
       </div>
     </header>

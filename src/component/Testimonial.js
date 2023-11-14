@@ -11,7 +11,7 @@ export default function Testimonial() {
 
   return (
     <div className="container">
-      <Slider {...settings} className="px-3 py-7 lg:px-5 lg:py-10">
+      <Slider {...settings} className="px-5 sm:py-7 lg:py-10">
         <div className="testimonial-slide">
           <div className="testimonial-content">
             <img
@@ -23,7 +23,7 @@ export default function Testimonial() {
                 <p className="text-2xl">Kay Kim, Co-Founder</p>
                 <span className="modal-logo">
                   <img
-                    className="h-full w-2/3"
+                    className="h-full w-full lg:w-2/3"
                     src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/rooted-logo-x2.321d79d.png"
                     alt=""
                   />
@@ -51,7 +51,7 @@ export default function Testimonial() {
                 </p>
                 <span className="modal-logo">
                   <img
-                    className="h-full w-2/3"
+                    className="h-full w-full lg:w-2/3"
                     src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/naadam-logo-x2.0a3b198.png"
                     alt=""
                   />
@@ -78,7 +78,7 @@ export default function Testimonial() {
                 </p>
                 <span className="modal-logo">
                   <img
-                    className="h-full w-2/3"
+                    className="h-full w-full lg:w-2/3"
                     src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/lavender-logo-x2.89c5e2e.png"
                     alt=""
                   />
@@ -103,7 +103,7 @@ export default function Testimonial() {
                 <p className="text-2xl">Tim and Dan Joo, Co-Founders</p>
                 <span className="modal-logo">
                   <img
-                    className="h-full w-2/3"
+                    className="h-full w-full lg:w-2/3"
                     src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/haerfest-logo-x2.03fa5c5.png"
                     alt=""
                   />
