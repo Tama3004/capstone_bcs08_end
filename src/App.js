@@ -5,9 +5,9 @@ import RegPage from "./page/Register/RegPage";
 import Layout from "./template/Layout";
 import HomePage from "./page/Home/HomePage";
 import Title from "./page/Title/Title";
+import Profile from "./page/Profile/Profile";
 import Categories from "./page/Categories/Categories";
 import JobDetail from "./page/JobDetail/JobDetail";
-import Profile from "./page/Profile/Profile";
 
 function App() {
   return (
@@ -48,7 +48,7 @@ function App() {
                 <Profile />
               </Layout>
             }
-          />
+          ></Route>
           <Route path="/categories">
             <Route
               path=":id"

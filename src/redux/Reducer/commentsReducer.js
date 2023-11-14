@@ -4,13 +4,15 @@ const initialState = {
   arrComments: [],
   saoCongViec: 0,
   danhGia: 0,
+  giaTien: 0,
+  moTaNgan: "",
 };
 
 const commentsReducer = createSlice({
   name: "commentsReducer",
   initialState,
   reducers: {
-    getComments: (state, actions) => {
+    setComments: (state, actions) => {
       state.arrComments = actions.payload;
     },
     setSaoCongViec: (state, actions) => {
@@ -19,10 +21,20 @@ const commentsReducer = createSlice({
     setDanhGia: (state, actions) => {
       state.danhGia = actions.payload;
     },
+    setGiaTien: (state, actions) => {
+      state.giaTien = actions.payload;
+    },
+    setMotaNgan: (state, actions) => {
+      state.moTaNgan = actions.payload;
+    },
   },
 });
 
-export const { getComments, setSaoCongViec, setDanhGia } =
-  commentsReducer.actions;
+export const {
+  setComments,
+  setSaoCongViec,
+  setDanhGia,
+  setGiaTien,
+  setMotaNgan,
+} = commentsReducer.actions;
 export default commentsReducer.reducer;
-
