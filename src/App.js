@@ -5,6 +5,8 @@ import RegPage from "./page/Register/RegPage";
 import Layout from "./template/Layout";
 import HomePage from "./page/Home/HomePage";
 import Title from "./page/Title/Title";
+import Categories from "./page/Categories/Categories";
+import JobDetail from "./page/JobDetail/JobDetail";
 import Profile from "./page/Profile/Profile";
 
 function App() {
@@ -47,6 +49,26 @@ function App() {
               </Layout>
             }
           />
+          <Route path="/categories">
+            <Route
+              path=":id"
+              element={
+                <Layout>
+                  <Categories />
+                </Layout>
+              }
+            />
+          </Route>
+          <Route path="/jobDetail">
+            <Route
+              path=":id"
+              element={
+                <Layout>
+                  <JobDetail />
+                </Layout>
+              }
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

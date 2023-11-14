@@ -15,8 +15,10 @@ import {
 } from "react-icons/fa6";
 import { userLocalStorage } from "../../api/localService";
 import { updateUser } from "../../redux/Reducer/userReducer";
+import { useMediaQuery } from "react-responsive";
 
 export default function InfoProfile() {
+  const isMobile = useMediaQuery({ maxWidth: 480 });
   let dispatch = useDispatch();
   let { user } = useSelector((state) => {
     return state.userReducer.userLogin;
@@ -74,7 +76,7 @@ export default function InfoProfile() {
   const { Option } = Select;
 
   return (
-    <div className="w-1/3">
+    <div className={isMobile ? "w-full" : "w-1/3"}>
       <div className="border-2 p-4 mb-5">
         <div className="flex-col justify-center items-center text-center">
           <div>
@@ -96,7 +98,10 @@ export default function InfoProfile() {
             </Upload>
           </div>
           <p className="text-xl font-bold">{user.email}</p>
-          <Button className="relative-button border-none w-2" onClick={showModal}>
+          <Button
+            className="relative-button border-none w-2"
+            onClick={showModal}
+          >
             <span className="absolute-span text-2xl text-center">
               <AiFillEdit></AiFillEdit>
             </span>
