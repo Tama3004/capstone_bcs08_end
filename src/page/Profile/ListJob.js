@@ -6,10 +6,6 @@ import { NavLink } from "react-router-dom";
 import { message } from "antd";
 
 export default function ListJob() {
-  let { userLogin } = useSelector((state) => {
-    return state.userReducer;
-  });
-
   let [listJobThue, setListJobThue] = useState(null);
 
   const getListJobThue = () => {
@@ -107,7 +103,7 @@ export default function ListJob() {
   };
 
   return (
-    <div className="gigs lg:pl-5">
+    <div className="gigs hidden min-[500px]:block lg:pl-5 mt-4">
       <div className="gigs_card_top mb-7">
         <div className="gigs_card bg-white flex items-center justify-between p-7 border border-gray-500 text-gray-600 text-lg font-bold">
           <span class="col-lg-8 col-xl-6 col-8 col-sm-6 w-[70%]">
