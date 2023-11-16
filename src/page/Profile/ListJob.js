@@ -82,13 +82,17 @@ export default function ListJob() {
           </div>
           <div className="btn_edit flex justify-end">
             <NavLink to={`/jobDetail/${item.congViec.id}`}>
-              <button className="viewdetail bg-green-500 text-white font-bold rounded transition-all hover:shadow-lg mr-7 px-3 py-2">
+              <button
+                className="viewdetail bg-green-500 text-white font-bold rounded transition-all hover:shadow-lg mr-7 px-3 py-2"
+                style={{ outline: "none" }}
+              >
                 View detail
               </button>
             </NavLink>
             <div class="right">
               <button
                 class="delete bg-red-500 text-white font-bold rounded transition-all hover:shadow-lg px-3 py-2"
+                style={{ outline: "none" }}
                 onClick={() => {
                   handleDeleteJob(item.id);
                 }}
@@ -105,11 +109,14 @@ export default function ListJob() {
   return (
     <div className="gigs hidden min-[500px]:block lg:pl-5 mt-4">
       <div className="gigs_card_top mb-7">
-        <div className="gigs_card bg-white flex items-center justify-between p-7 border border-gray-500 text-gray-600 text-lg font-bold">
-          <span class="col-lg-8 col-xl-6 col-8 col-sm-6 w-[70%]">
+        <div className="gigs_card bg-white flex items-center justify-between p-7 border border-gray-500 text-lg font-bold">
+          <span class="col-lg-8 col-xl-6 col-8 col-sm-6 w-[70%] text-gray-800">
             It seems that you don't have any active Gigs.
           </span>
-          <button class="col-lg-3 col-xl-3 col-4 col-sm-4 w-[30%] bg-green-500 text-white rounded transition-all hover:shadow-lg">
+          <button
+            class="col-lg-3 col-xl-3 col-4 col-sm-4 w-[30%] bg-green-500 text-white rounded transition-all hover:shadow-lg px-2 py-2"
+            style={{ outline: "none" }}
+          >
             Create a new Gig
           </button>
         </div>

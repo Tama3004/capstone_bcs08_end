@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { https } from "../../api/config";
-import { Button, Dropdown, message } from "antd";
+import { Dropdown, Modal, message } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { userLocalStorage } from "../../api/localService";
 
@@ -13,6 +13,12 @@ export default function UserInfo() {
       window.location.href = "/";
     }, 3000);
   };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
   const items = [
     {
       key: "1",
@@ -30,6 +36,27 @@ export default function UserInfo() {
   let [infoSeller, setInfoSeller] = useState(null);
 
   let [avatar, setAvatar] = useState(null);
+
+  let [changeInfo, setChangeInfo] = useState({
+    id: infoSeller?.id,
+    name: "",
+    email: infoSeller?.email,
+    phone: "",
+    birthday: "",
+    gender: null,
+    role: infoSeller?.role,
+    skill: [],
+    certification: [],
+    bookingJob: [],
+  });
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+    console.log(changeInfo);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   const getUserInfo = () => {
     https
@@ -83,6 +110,21 @@ export default function UserInfo() {
     //     console.log(formData);
     //     console.log(file);
     //   });
+  };
+
+  let handleChangeForm = (e) => {
+    const { name, value } = e.target;
+    if (name == "skill" || name == "certification" || name == "bookingJob") {
+      setChangeInfo({
+        ...changeInfo,
+        [name]: [value],
+      });
+    } else {
+      setChangeInfo({
+        ...changeInfo,
+        [name]: value,
+      });
+    }
   };
 
   return (
@@ -182,7 +224,10 @@ export default function UserInfo() {
           <div className="inner_item border-b border-gray-300 mb-8 pb-3">
             <div className="inner_row flex items-center justify-between">
               <h3 className="text-gray-800 font-bold text-lg">Description</h3>
-              <div className="edit text-gray-400 hover:text-black cursor-pointer">
+              <div
+                className="edit text-gray-400 hover:text-black cursor-pointer"
+                onClick={showModal}
+              >
                 <i class="fa-sharp fa-solid fa-pen"></i>
               </div>
             </div>
@@ -222,7 +267,10 @@ export default function UserInfo() {
           <div className="inner_item border-b border-gray-300 mb-8 pb-3">
             <div className="inner_row flex items-center justify-between">
               <h3 className="text-gray-800 font-bold text-lg">Skills</h3>
-              <div className="edit text-gray-400 hover:text-black cursor-pointer">
+              <div
+                className="edit text-gray-400 hover:text-black cursor-pointer"
+                onClick={showModal}
+              >
                 <i class="fa-sharp fa-solid fa-pen"></i>
               </div>
             </div>
@@ -231,7 +279,10 @@ export default function UserInfo() {
           <div className="inner_item border-b border-gray-300 mb-8 pb-3">
             <div className="inner_row flex items-center justify-between">
               <h3 className="text-gray-800 font-bold text-lg">Education</h3>
-              <div className="edit text-gray-400 hover:text-black cursor-pointer">
+              <div
+                className="edit text-gray-400 hover:text-black cursor-pointer"
+                onClick={showModal}
+              >
                 <i class="fa-sharp fa-solid fa-pen"></i>
               </div>
             </div>
@@ -240,7 +291,10 @@ export default function UserInfo() {
           <div className="inner_item border-b border-gray-300 mb-8 pb-3">
             <div className="inner_row flex items-center justify-between">
               <h3 className="text-gray-800 font-bold text-lg">Certification</h3>
-              <div className="edit text-gray-400 hover:text-black cursor-pointer">
+              <div
+                className="edit text-gray-400 hover:text-black cursor-pointer"
+                onClick={showModal}
+              >
                 <i class="fa-sharp fa-solid fa-pen"></i>
               </div>
             </div>
@@ -314,6 +368,79 @@ export default function UserInfo() {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      <Modal
+        className="w-full h-full"
+        width={"80%"}
+        title={
+          <p className="text-center font-bold text-xl border-b border-gray-300 pb-3">
+            Update User
+          </p>
+        }
+        open={isModalOpen}
+        onCancel={handleCancel}
+        footer={[
+          <div className="flex flex-col gap-3 min-[255px]:gap-0 min-[255px]:flex-row min-[255px]:justify-end">
+            <button
+              className="bg-red-500 text-white font-bold rounded transition-all hover:shadow-lg mr-7 px-3 py-2"
+              onClick={handleCancel}
+            >
+              CANCEL
+            </button>
+            <button
+              className="bg-green-500 text-white font-bold rounded transition-all hover:shadow-lg px-3 py-2"
+              onClick={handleOk}
+            >
+              SAVE
+            </button>
+          </div>,
+        ]}
+      >
+        <div className="flex flex-col lg:flex-row justify-between">
+          <div className="w-full lg:w-1/2 pr-2">
+            <div className="pb-4">
+              <p className=" text-sm text-gray-600">Email:</p>
+              <input
+                name="email"
+                className="border border-gray-400 rounded px-2 py-3 w-full text-gray-400"
+                type="text"
+                value={infoSeller?.email}
+                disabled
+              />
+            </div>
+            <div className="pb-4">
+              <p className=" text-sm text-gray-600">Name:</p>
+              <input
+                name="name"
+                className="border border-gray-400 rounded hover:border-black px-2 py-3 w-full outline-blue-400"
+                type="text"
+                onChange={handleChangeForm}
+              />
+            </div>
+          </div>
+          <div className="w-full lg:w-1/2 pl-2">
+            <div className="pb-4">
+              <p className=" text-sm text-gray-600">Phone:</p>
+              <input
+                name="phone"
+                className="border border-gray-400 rounded hover:border-black px-2 py-3 w-full outline-blue-400"
+                type="text"
+                onChange={handleChangeForm}
+              />
+            </div>
+            <div className="pb-4">
+              <p className=" text-sm text-gray-600">Birthday:</p>
+              <input
+                name="birthday"
+                className="border border-gray-400 rounded hover:border-black px-2 py-3 w-full outline-blue-400"
+                type="text"
+                onChange={handleChangeForm}
+              />
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }
