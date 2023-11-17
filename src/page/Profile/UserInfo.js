@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { https } from "../../api/config";
-import { Dropdown, Modal, message } from "antd";
+import { Dropdown, Input, Modal, Radio, message } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { userLocalStorage } from "../../api/localService";
 
@@ -34,29 +34,20 @@ export default function UserInfo() {
   });
 
   let [infoSeller, setInfoSeller] = useState(null);
-
-  let [avatar, setAvatar] = useState(null);
+  const [avatar, setAvatar] = useState("");
 
   let [changeInfo, setChangeInfo] = useState({
-    id: infoSeller?.id,
+    id: "",
     name: "",
-    email: infoSeller?.email,
+    email: "",
     phone: "",
     birthday: "",
-    gender: null,
-    role: infoSeller?.role,
+    gender: "",
+    role: "",
     skill: [],
     certification: [],
     bookingJob: [],
   });
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-    console.log(changeInfo);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
 
   const getUserInfo = () => {
     https
@@ -64,6 +55,18 @@ export default function UserInfo() {
       .then((res) => {
         console.log(res);
         setInfoSeller(res.data.content);
+        setChangeInfo({
+          id: res.data.content.id,
+          name: res.data.content.name,
+          email: res.data.content.email,
+          phone: res.data.content.phone,
+          birthday: res.data.content.birthday,
+          gender: res.data.content.gender,
+          role: res.data.content.role,
+          skill: res.data.content.skill,
+          certification: res.data.content.certification,
+          bookingJob: res.data.content.bookingJob,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -73,32 +76,18 @@ export default function UserInfo() {
   useEffect(() => {
     let fetchData = () => {
       getUserInfo();
-      //   https
-      //     .get(`/api/users/${userLogin?.user.id}`)
-      //     .then((res) => {
-      //       console.log(res);
-      //       setInfoSeller(res.data.content);
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //     });
     };
     fetchData();
   }, [userLogin]);
 
   let handleChangeAvatar = (e) => {
-    let file = e.target.files;
-    console.log("🤣 ~ file: UserInfo.js:64 ~ handleChangeAvatar ~ file:", file);
-    let formData = new FormData();
-    formData.append("avatar", file);
-    console.log(
-      "🤣 ~ file: UserInfo.js:66 ~ handleChangeAvatar ~ formData:",
-      formData
-    );
+    console.log(e.target.files);
+    // setAvatar(e.target.files[0]);
+    // const formData = new FormData();
+    // formData.append("avatar", avatar);
     // https
     //   .post(`/api/users/upload-avatar`, formData, {
     //     headers: {
-    //       "Content-Type": "multipart/form-data",
     //       token: userLocalStorage.get().token,
     //     },
     //   })
@@ -107,8 +96,7 @@ export default function UserInfo() {
     //   })
     //   .catch((err) => {
     //     console.log(err);
-    //     console.log(formData);
-    //     console.log(file);
+    //     console.log(avatar);
     //   });
   };
 
@@ -125,6 +113,29 @@ export default function UserInfo() {
         [name]: value,
       });
     }
+  };
+
+  const handleSave = () => {
+    setIsModalOpen(false);
+    console.log(changeInfo);
+    https
+      .put(`/api/users/${infoSeller.id}`, changeInfo, {
+        headers: {
+          token: userLocalStorage.get().token,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        getUserInfo();
+        message.success("Đã cập nhật thành công!");
+      })
+      .catch((err) => {
+        console.log(err);
+        message.error("Đã có lỗi xảy ra");
+      });
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -163,7 +174,6 @@ export default function UserInfo() {
                 <input
                   className="label_inp hidden"
                   type="file"
-                  ref={setAvatar}
                   onChange={handleChangeAvatar}
                 />
                 <div className="image flex items-center justify-center bg-white text-white rounded-full w-full h-full">
@@ -189,7 +199,10 @@ export default function UserInfo() {
                 {infoSeller?.email}
               </p>
               <div className="btn_update">
-                <div className="edit text-gray-400 hover:text-black cursor-pointer">
+                <div
+                  className="edit text-gray-400 hover:text-black cursor-pointer"
+                  onClick={showModal}
+                >
                   <i class="fa-sharp fa-solid fa-pen"></i>
                 </div>
               </div>
@@ -346,16 +359,16 @@ export default function UserInfo() {
                   </a>
                 </li>
                 <li className="flex items-center mb-1 gap-3">
-                  <i class="fa-sharp fa-solid fa-plus"></i>
+                  <i class="fa-brands fa-dribbble"></i>
                   <a
-                    href="#dirbble"
+                    href="#dribbble"
                     className="no-underline hover:no-underline text-blue-500 cursor-pointer"
                   >
-                    Dirbble
+                    Dribbble
                   </a>
                 </li>
                 <li className="flex items-center mb-1 gap-3">
-                  <i class="fa-sharp fa-solid fa-plus"></i>
+                  <i class="fa-brands fa-stack-overflow"></i>
                   <a
                     href="#stackoverflow"
                     className="no-underline hover:no-underline text-blue-500 cursor-pointer"
@@ -381,62 +394,107 @@ export default function UserInfo() {
         open={isModalOpen}
         onCancel={handleCancel}
         footer={[
-          <div className="flex flex-col gap-3 min-[255px]:gap-0 min-[255px]:flex-row min-[255px]:justify-end">
+          <div className="flex flex-col gap-3 min-[300px]:gap-0 min-[300px]:flex-row min-[300px]:justify-end">
             <button
               className="bg-red-500 text-white font-bold rounded transition-all hover:shadow-lg mr-7 px-3 py-2"
+              style={{ outline: "none" }}
               onClick={handleCancel}
             >
               CANCEL
             </button>
             <button
               className="bg-green-500 text-white font-bold rounded transition-all hover:shadow-lg px-3 py-2"
-              onClick={handleOk}
+              style={{ outline: "none" }}
+              onClick={handleSave}
             >
               SAVE
             </button>
           </div>,
         ]}
       >
-        <div className="flex flex-col lg:flex-row justify-between">
-          <div className="w-full lg:w-1/2 pr-2">
-            <div className="pb-4">
-              <p className=" text-sm text-gray-600">Email:</p>
-              <input
-                name="email"
-                className="border border-gray-400 rounded px-2 py-3 w-full text-gray-400"
-                type="text"
-                value={infoSeller?.email}
-                disabled
-              />
+        <div>
+          <div className="top flex flex-col lg:flex-row justify-between">
+            <div className="w-full lg:w-1/2 pr-2">
+              <div className="pb-4">
+                <p className="text-sm text-gray-600">Email:</p>
+                <input
+                  name="email"
+                  type="text"
+                  value={changeInfo?.email}
+                  disabled
+                  className="border border-gray-400 rounded px-2 py-3 w-full text-gray-400 bg-gray-100"
+                />
+              </div>
+              <div className="pb-4">
+                <p className="text-sm text-gray-600">Name:</p>
+                <input
+                  name="name"
+                  type="text"
+                  value={changeInfo?.name}
+                  className="border border-gray-400 rounded hover:border-black px-2 py-3 w-full outline-blue-400"
+                  onChange={handleChangeForm}
+                />
+              </div>
             </div>
-            <div className="pb-4">
-              <p className=" text-sm text-gray-600">Name:</p>
-              <input
-                name="name"
-                className="border border-gray-400 rounded hover:border-black px-2 py-3 w-full outline-blue-400"
-                type="text"
-                onChange={handleChangeForm}
-              />
+            <div className="w-full lg:w-1/2 pl-2">
+              <div className="pb-4">
+                <p className="text-sm text-gray-600">Phone:</p>
+                <input
+                  name="phone"
+                  type="text"
+                  value={changeInfo?.phone}
+                  className="border border-gray-400 rounded hover:border-black px-2 py-3 w-full outline-blue-400"
+                  onChange={handleChangeForm}
+                />
+              </div>
+              <div className="pb-4">
+                <p className="text-sm text-gray-600">Birthday:</p>
+                <input
+                  name="birthday"
+                  type="text"
+                  value={changeInfo?.birthday}
+                  className="border border-gray-400 rounded hover:border-black px-2 py-3 w-full outline-blue-400"
+                  onChange={handleChangeForm}
+                />
+              </div>
             </div>
           </div>
-          <div className="w-full lg:w-1/2 pl-2">
-            <div className="pb-4">
-              <p className=" text-sm text-gray-600">Phone:</p>
-              <input
-                name="phone"
-                className="border border-gray-400 rounded hover:border-black px-2 py-3 w-full outline-blue-400"
-                type="text"
-                onChange={handleChangeForm}
-              />
+
+          <div className="pb-4">
+            <p className="text-sm text-gray-600">Gender:</p>
+            <Radio.Group
+              name="gender"
+              onChange={handleChangeForm}
+              value={changeInfo?.gender}
+            >
+              <Radio value={true}>Male</Radio>
+              <Radio value={false}>Female</Radio>
+            </Radio.Group>
+          </div>
+          <div className="bot flex flex-col lg:flex-row justify-between">
+            <div className="w-full lg:w-1/2 pr-2">
+              <div className="pb-4">
+                <p className="text-sm text-gray-600">Certification:</p>
+                <Input
+                  name="certification"
+                  type="text"
+                  value={changeInfo?.certification}
+                  className="border border-gray-400 rounded hover:border-black px-2 py-3 w-full outline-blue-400"
+                  onChange={handleChangeForm}
+                />
+              </div>
             </div>
-            <div className="pb-4">
-              <p className=" text-sm text-gray-600">Birthday:</p>
-              <input
-                name="birthday"
-                className="border border-gray-400 rounded hover:border-black px-2 py-3 w-full outline-blue-400"
-                type="text"
-                onChange={handleChangeForm}
-              />
+            <div className="w-full lg:w-1/2 pl-2">
+              <div className="pb-4">
+                <p className="text-sm text-gray-600">Skill:</p>
+                <input
+                  name="skill"
+                  type="text"
+                  value={changeInfo?.skill}
+                  className="border border-gray-400 rounded hover:border-black px-2 py-3 w-full outline-blue-400"
+                  onChange={handleChangeForm}
+                />
+              </div>
             </div>
           </div>
         </div>
