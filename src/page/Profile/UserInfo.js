@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { https } from "../../api/config";
-import { Dropdown, Input, Modal, Radio, message } from "antd";
+import { Dropdown, Input, Modal, Radio, Upload, message } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { userLocalStorage } from "../../api/localService";
 
@@ -34,7 +34,6 @@ export default function UserInfo() {
   });
 
   let [infoSeller, setInfoSeller] = useState(null);
-  const [avatar, setAvatar] = useState("");
 
   let [changeInfo, setChangeInfo] = useState({
     id: "",
@@ -80,24 +79,25 @@ export default function UserInfo() {
     fetchData();
   }, [userLogin]);
 
-  let handleChangeAvatar = (e) => {
-    console.log(e.target.files);
-    // setAvatar(e.target.files[0]);
-    // const formData = new FormData();
-    // formData.append("avatar", avatar);
-    // https
-    //   .post(`/api/users/upload-avatar`, formData, {
-    //     headers: {
-    //       token: userLocalStorage.get().token,
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     console.log(avatar);
-    //   });
+  const handleChangeAvatar = (file) => {
+    const formData = new FormData();
+    formData.append("formFile", file);
+    https
+      .post(`/api/users/upload-avatar`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          token: userLocalStorage.get().token,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.content?.avatar);
+        getUserInfo();
+        message.success("Cập nhật avatar thành công!");
+      })
+      .catch((err) => {
+        console.log(err);
+        message.error("Có lỗi xảy ra!");
+      });
   };
 
   let handleChangeForm = (e) => {
@@ -127,11 +127,11 @@ export default function UserInfo() {
       .then((res) => {
         console.log(res);
         getUserInfo();
-        message.success("Đã cập nhật thành công!");
+        message.success("Cập nhật thành công!");
       })
       .catch((err) => {
         console.log(err);
-        message.error("Đã có lỗi xảy ra");
+        message.error("Có lỗi xảy ra!");
       });
   };
   const handleCancel = () => {
@@ -171,10 +171,10 @@ export default function UserInfo() {
                     <i class="las la-camera"></i>
                   </span>
                 </div>
-                <input
-                  className="label_inp hidden"
-                  type="file"
-                  onChange={handleChangeAvatar}
+                <Upload
+                  className="label_inp hidden avatar-uploader absolute"
+                  beforeUpload={handleChangeAvatar}
+                  showUploadList={false}
                 />
                 <div className="image flex items-center justify-center bg-white text-white rounded-full w-full h-full">
                   {infoSeller?.avatar.length === 0 && (
