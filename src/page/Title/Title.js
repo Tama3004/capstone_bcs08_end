@@ -16,7 +16,7 @@ export default function Title() {
       https
         .get(`/api/cong-viec/lay-chi-tiet-loai-cong-viec/${id}`)
         .then((res) => {
-          console.log(res.data.content);
+          console.log(res.data.content[0]);
           dispatch(getJobDetail(res.data.content[0]));
         })
         .catch((err) => {

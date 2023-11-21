@@ -3,13 +3,8 @@ import { useParams } from "react-router-dom";
 import { https } from "../../api/config";
 import { Collapse, Rate } from "antd";
 import { useDispatch } from "react-redux";
-import {
-  setDanhGia,
-  setGiaTien,
-  setMotaNgan,
-  setSaoCongViec,
-} from "../../redux/Reducer/commentsReducer";
 import DetailPackage from "./DetailPackage";
+import { getDetailCongViec } from "../../redux/Reducer/jobReducer";
 
 export default function ListPackage() {
   let { id } = useParams();
@@ -74,10 +69,7 @@ export default function ListPackage() {
         .then((res) => {
           console.log(res.data.content);
           setListPackage(res.data.content);
-          dispatch(setSaoCongViec(res.data.content[0].congViec.saoCongViec));
-          dispatch(setDanhGia(res.data.content[0].congViec.danhGia));
-          dispatch(setGiaTien(res.data.content[0].congViec.giaTien));
-          dispatch(setMotaNgan(res.data.content[0].congViec.moTaNgan));
+          dispatch(getDetailCongViec(res.data.content[0]));
         })
         .catch((err) => {
           console.log(err);

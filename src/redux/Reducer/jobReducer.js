@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   arrLoaiCongViec: [],
   jobTitleDetail: [],
+  detailCongViec: [],
 };
 
 const jobReducer = createSlice({
@@ -15,8 +16,12 @@ const jobReducer = createSlice({
     getJobDetail: (state, actions) => {
       state.jobTitleDetail = actions.payload;
     },
+    getDetailCongViec: (state, actions) => {
+      state.detailCongViec = actions.payload;
+    },
   },
 });
 
-export const { getMenuLoaiCongViec, getJobDetail } = jobReducer.actions;
+export const { getMenuLoaiCongViec, getJobDetail, getDetailCongViec } =
+  jobReducer.actions;
 export default jobReducer.reducer;

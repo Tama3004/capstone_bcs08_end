@@ -9,21 +9,21 @@ import { userLocalStorage } from "../../api/localService";
 export default function DetailPackage() {
   let { id } = useParams();
 
-  let { giaTien, moTaNgan } = useSelector((state) => {
-    return state.commentsReducer;
+  let { detailCongViec } = useSelector((state) => {
+    return state.jobReducer;
   });
 
   let { userLogin } = useSelector((state) => {
     return state.userReducer;
   });
 
-  const [thueCongViec, setThueCongViec] = useState({
+  const thueCongViec = {
     id: 0,
     maCongViec: id,
     maNguoiThue: userLogin?.user.id,
     ngayThue: moment().format("DD/MM/YYYY"),
     hoanThanh: true,
-  });
+  };
 
   let handleThueViec = () => {
     if (userLogin) {
@@ -51,9 +51,9 @@ export default function DetailPackage() {
         <div className="check-out-body">
           <div class="price flex items-center justify-between text-2xl font-semibold text-gray-600">
             <span class="title">{type}</span>
-            <span class="title">US${giaTien}</span>
+            <span class="title">US${detailCongViec?.congViec?.giaTien}</span>
           </div>
-          <p class="description my-4">{moTaNgan}</p>
+          <p class="description my-4">{detailCongViec?.congViec?.moTaNgan}</p>
           <div class="additional-info flex gap-4 mb-3">
             <div class="delivery flex items-center gap-1">
               <svg
@@ -136,7 +136,7 @@ export default function DetailPackage() {
             className="submit py-3 px-6 w-full bg-green-500 rounded-sm border border-inherit text-center text-white font-semibold hover:bg-green-600 outline-none"
             onClick={handleThueViec}
           >
-            Continue (US${giaTien})
+            Continue (US${detailCongViec?.congViec?.giaTien})
           </button>
           <a
             href="#compare"
