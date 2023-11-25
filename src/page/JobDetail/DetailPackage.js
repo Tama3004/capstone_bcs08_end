@@ -1,5 +1,5 @@
-import { ConfigProvider, Tabs, message, theme } from "antd";
-import React, { useEffect, useState } from "react";
+import { ConfigProvider, Tabs, message } from "antd";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { https } from "../../api/config";

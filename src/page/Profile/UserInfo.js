@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { https } from "../../api/config";
-import { Dropdown, Input, Modal, Radio, Upload, message } from "antd";
+import { Dropdown, Modal, Radio, Upload, message } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { userLocalStorage } from "../../api/localService";
 
@@ -478,7 +478,7 @@ export default function UserInfo() {
             <div className="w-full lg:w-1/2 pr-2">
               <div className="pb-4">
                 <p className="text-sm text-gray-600">Certification:</p>
-                <Input
+                <input
                   name="certification"
                   type="text"
                   value={changeInfo?.certification}
