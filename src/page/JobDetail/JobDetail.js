@@ -4,9 +4,10 @@ import DetailPackage from "./DetailPackage";
 import Comment from "./Comment";
 import { Breadcrumb } from "antd";
 import { useSelector } from "react-redux";
+import { HomeOutlined } from "@ant-design/icons";
 
 export default function JobDetail() {
-  let { jobTitleDetail, detailCongViec } = useSelector((state) => {
+  let { detailCongViec } = useSelector((state) => {
     return state.jobReducer;
   });
 
@@ -15,14 +16,8 @@ export default function JobDetail() {
       <Breadcrumb
         items={[
           {
-            href: `/title/${jobTitleDetail?.id || 1}`,
-            title: (
-              <>
-                <span>
-                  {jobTitleDetail?.tenLoaiCongViec || "Graphics & Design"}
-                </span>
-              </>
-            ),
+            href: `/`,
+            title: <HomeOutlined />,
           },
           {
             href: `/categories/${detailCongViec?.congViec?.maChiTietLoaiCongViec}`,
@@ -33,10 +28,11 @@ export default function JobDetail() {
             ),
           },
           {
-            href: `/jobDetail/${detailCongViec?.congViec?.id}`,
             title: (
               <>
-                <span>{detailCongViec?.congViec?.tenCongViec}</span>
+                <span className="text-gray-400">
+                  {detailCongViec?.congViec?.tenCongViec}
+                </span>
               </>
             ),
           },
