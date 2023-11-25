@@ -411,6 +411,7 @@ export default function Comment() {
             type="text"
             name="search"
             placeholder="Search reviews"
+            autoComplete="off"
           />
           <button type="button" className="bg-black rounded-r-[4px] py-2 px-4">
             <span>

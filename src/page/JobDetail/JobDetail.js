@@ -23,7 +23,7 @@ export default function JobDetail() {
             href: `/categories/${detailCongViec?.congViec?.maChiTietLoaiCongViec}`,
             title: (
               <>
-                <span>{detailCongViec?.tenChiTietLoai}</span>
+                <button className="">{detailCongViec?.tenChiTietLoai}</button>
               </>
             ),
           },

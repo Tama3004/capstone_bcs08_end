@@ -430,6 +430,7 @@ export default function UserInfo() {
                 <input
                   name="name"
                   type="text"
+                  autoComplete="off"
                   value={changeInfo?.name}
                   className="border border-gray-400 rounded hover:border-black px-2 py-3 w-full outline-blue-400"
                   onChange={handleChangeForm}
@@ -442,6 +443,7 @@ export default function UserInfo() {
                 <input
                   name="phone"
                   type="text"
+                  autoComplete="off"
                   value={changeInfo?.phone}
                   className="border border-gray-400 rounded hover:border-black px-2 py-3 w-full outline-blue-400"
                   onChange={handleChangeForm}
@@ -452,6 +454,7 @@ export default function UserInfo() {
                 <input
                   name="birthday"
                   type="text"
+                  autoComplete="off"
                   value={changeInfo?.birthday}
                   className="border border-gray-400 rounded hover:border-black px-2 py-3 w-full outline-blue-400"
                   onChange={handleChangeForm}
@@ -479,6 +482,7 @@ export default function UserInfo() {
                   name="certification"
                   type="text"
                   value={changeInfo?.certification}
+                  autoComplete="off"
                   className="border border-gray-400 rounded hover:border-black px-2 py-3 w-full outline-blue-400"
                   onChange={handleChangeForm}
                 />
@@ -490,6 +494,7 @@ export default function UserInfo() {
                 <input
                   name="skill"
                   type="text"
+                  autoComplete="off"
                   value={changeInfo?.skill}
                   className="border border-gray-400 rounded hover:border-black px-2 py-3 w-full outline-blue-400"
                   onChange={handleChangeForm}
