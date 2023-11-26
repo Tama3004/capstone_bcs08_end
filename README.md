@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+<h1 align="center">Dự án cuối khóa Fiverr</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📝 Mô tả
 
-## Available Scripts
+Dự án này được tạo ra để thực hiện các yêu cầu của Dự án cuối khóa Fiverr. Dự án
+bao gồm một trang web cho phép mọi người có thể thuê các dịch vụ từ các
+freelancer trên toàn thế giới.
 
-In the project directory, you can run:
+## ✨ Kỹ năng
 
-### `npm start`
+- ReactJS
+- Redux
+- Axios
+- Ant Design
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## ⌨️ Phát triển
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Clone source:
 
-### `npm test`
+```bash
+$ git clone https://github.com/Tama3004/capstone_bcs08_end.git
+$ cd capstone_bcs08_end
+$ npm install
+$ npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🔗 Links
 
-### `npm run build`
+- Link source: [GitHub](https://github.com/Tama3004/capstone_bcs08_end.git)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Link deploy: [chưacó](https://www.google.com)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Link youtube: [chưacó](https://www.google.com)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🖼️ Hình ảnh
 
-### `npm run eject`
+![Ảnh demo dự án](./public/img/ReadmeImg/DemoDuAn.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 👨‍💻 Tác giả
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<a href="https://github.com/Tama3004" title="Nguyễn Minh Tâm"><img src="https://avatars.githubusercontent.com/u/138957317?v=4" width="70" height="70" style="border-radius: 50%" alt="Nguyễn Minh Tâm"></a>
+<a href="https://github.com/Khoahello" title="Đinh Tấn Khoa"><img src="https://avatars.githubusercontent.com/u/138957990?s=400&u=1ea3b57d20c60fd2753043d53a2638b9f1e850f0&v=4" width="70" height="70" style="border-radius: 50%" alt="Nguyễn Minh Tâm"></a>
