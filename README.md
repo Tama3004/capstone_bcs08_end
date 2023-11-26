@@ -9,7 +9,7 @@ freelancer trên toàn thế giới.
 ## ✨ Kỹ năng
 
 - ReactJS
-- Redux
+- Redux Toolkit
 - Axios
 - Ant Design
 
