@@ -13,6 +13,9 @@ $header-active: true;
     align-items: center;
     background-color: white;
     padding: 1.5rem 1rem;
+    .fiveR{
+      color:#1e1690;
+    }
 }
 
 .header {
@@ -69,6 +72,7 @@ $header-active: true;
   padding: 10px 50px;
 }
 
+
 @media only screen and (max-width: $mobile-max-width) {
   .right_h {
     display: none;
@@ -113,6 +117,7 @@ $header-active: true;
     }
   }
 }
+
 
 @media only screen and (max-width: $ipadMini-max-width){
   .right_h {

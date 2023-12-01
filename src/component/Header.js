@@ -209,7 +209,7 @@ export default function Header() {
         <div className="right_h space-x-10 flex items-center md:text-sm lg:text-lg font-bold">
           <div className="flex gap-5 rh-content">
             <NavLink href="">
-              <button>Fiverr Business</button>
+              <button className="fiveR">Fiverr Business</button>
             </NavLink>
             <NavLink href="">
               <button>Explore</button>

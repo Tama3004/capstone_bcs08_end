@@ -3,6 +3,7 @@ import { https } from "../api/config";
 import { useDispatch } from "react-redux";
 import { getMenuLoaiCongViec } from "../redux/Reducer/jobReducer";
 import { NavLink, useLocation, useParams } from "react-router-dom";
+import { Dropdown } from "antd";
 
 export default function CategoriesHeader() {
   const [LoaiCv, setLoaiCv] = useState([]);
@@ -30,11 +31,13 @@ export default function CategoriesHeader() {
       .then((res) => {
         dispatch(getMenuLoaiCongViec(res.data.content));
         setLoaiCv(res.data.content);
+        console.log(res.data.content);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
   let renderMenuLoaiCv = () => {
     return (
       <div
@@ -45,10 +48,39 @@ export default function CategoriesHeader() {
         }
       >
         {LoaiCv.map((item, index) => {
+          const dropdownItems =
+            item?.dsNhomChiTietLoai[0]?.dsChiTietLoai?.map((item2, index2) => {
+              return {
+                key: index2,
+                label: (
+                  <NavLink
+                    to={`/categories/${item2.id}`}
+                    className="text-decoration-none"
+                  >
+                    {item2?.tenChiTiet}
+                  </NavLink>
+                ),
+              };
+            }) || [];
+
           return (
-            <NavLink to={`/title/${item.id}`} key={index}>
-              <button className="text-center lg:text-lg md:text-xs">{item.tenLoaiCongViec}</button>
-            </NavLink>
+            <Dropdown
+              menu={{
+                items: dropdownItems,
+              }}
+            >
+              <a onClick={(e) => e.preventDefault()}>
+                <NavLink
+                  to={`/title/${item.id}`}
+                  key={index}
+                  className="transition duration-150 hover:text-green-500"
+                >
+                  <button className="text-center lg:text-lg md:text-xs">
+                    {item.tenLoaiCongViec}
+                  </button>
+                </NavLink>
+              </a>
+            </Dropdown>
           );
         })}
       </div>
