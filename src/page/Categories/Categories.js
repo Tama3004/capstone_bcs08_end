@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Button, Dropdown, Space, Switch } from "antd";
-import { useDispatch } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import { https } from "../../api/config";
 import { useState } from "react";
@@ -42,14 +41,11 @@ export default function Categories() {
       https
         .get(`/api/cong-viec/lay-cong-viec-theo-chi-tiet-loai/${id}`)
         .then((res) => {
-          console.log(res.data.content);
           setJobCategoriesDetail(res.data.content);
           setCategoriesTitle(res.data.content[0].tenChiTietLoai);
           setAvailable(res.data.content.length);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => {});
     };
     fetchData();
   }, [id]);

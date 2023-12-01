@@ -3,10 +3,8 @@ import { useParams } from "react-router-dom";
 import { https } from "../../api/config";
 import { Collapse, Rate } from "antd";
 import { useDispatch } from "react-redux";
-import {
-  setDanhGia,
-  setSaoCongViec,
-} from "../../redux/Reducer/commentsReducer";
+import DetailPackage from "./DetailPackage";
+import { getDetailCongViec } from "../../redux/Reducer/jobReducer";
 
 export default function ListPackage() {
   let { id } = useParams();
@@ -69,22 +67,10 @@ export default function ListPackage() {
       https
         .get(`/api/cong-viec/lay-cong-viec-chi-tiet/${id}`)
         .then((res) => {
-          console.log(res.data.content);
           setListPackage(res.data.content);
-          dispatch(setSaoCongViec(res.data.content[0].congViec.saoCongViec));
-          console.log(
-            "res.data.content[0].congViec.saoCongViec: ",
-            res.data.content[0].congViec.saoCongViec
-          );
-          dispatch(setDanhGia(res.data.content[0].congViec.danhGia));
-          console.log(
-            "res.data.content[0].congViec.danhGia: ",
-            res.data.content[0].congViec.danhGia
-          );
+          dispatch(getDetailCongViec(res.data.content[0]));
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => {});
     };
     fetchData();
   }, [id]);
@@ -93,7 +79,7 @@ export default function ListPackage() {
     return listPackage?.map((item, index) => {
       return (
         <div key={index}>
-          <div className="job-title text-black text-[1.75rem] font-bold mb-4">
+          <div className="job-title text-gray-800 text-[1.75rem] font-bold mb-4">
             {item.congViec.tenCongViec}
           </div>
           <div className="seller-overview flex flex-wrap gap-3 items-center">
@@ -105,7 +91,7 @@ export default function ListPackage() {
                 alt="avatar"
               />
             </div>
-            <div class="seller-name text-black capitalize font-bold cursor-pointer">
+            <div class="seller-name text-gray-800 capitalize font-bold cursor-pointer">
               {item.tenNguoiTao}
             </div>
             <div class="seller-level font-medium">
@@ -141,8 +127,12 @@ export default function ListPackage() {
             />
           </div>
 
+          <div className="block lg:hidden mt-5">
+            <DetailPackage />
+          </div>
+
           <div class="job-description mt-5">
-            <h2 className="text-black text-2xl font-bold mb-7">
+            <h2 className="text-gray-800 text-2xl font-bold mb-7">
               About This Gig
             </h2>
             <div class="description text-lg pb-3 border-b border-gray-400">
@@ -151,7 +141,7 @@ export default function ListPackage() {
           </div>
 
           <div className="about-seller mt-5">
-            <h2 className="text-black text-2xl font-bold mb-7">
+            <h2 className="text-gray-800 text-2xl font-bold mb-7">
               About The Seller
             </h2>
             <div className="profile flex gap-3">
@@ -189,7 +179,7 @@ export default function ListPackage() {
             </div>
           </div>
           <div className="FAQ mt-5">
-            <h2 className="text-black text-2xl font-bold mb-7">FAQ</h2>
+            <h2 className="text-gray-800 text-2xl font-bold mb-7">FAQ</h2>
             <Collapse expandIconPosition={"end"} items={collapseItems} />
           </div>
         </div>

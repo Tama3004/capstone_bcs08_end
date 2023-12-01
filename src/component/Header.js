@@ -52,7 +52,11 @@ export default function Header() {
       // User Options
       const items = [
         {
-          label: <NavLink to="/profile">Profile</NavLink>,
+          label: (
+            <NavLink to={`/profile/${userLogin.user.id}`}>
+              <button>Profile</button>
+            </NavLink>
+          ),
           key: "0",
         },
         {
@@ -148,7 +152,7 @@ export default function Header() {
                           <NavLink>
                             <button onClick={handleLogOut}>Sign Out</button>
                           </NavLink>
-                          <NavLink to="/profile">
+                          <NavLink to={`/profile/${userLogin.user.id}`}>
                             <button>Profile</button>
                           </NavLink>
                         </div>

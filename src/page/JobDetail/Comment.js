@@ -11,8 +11,12 @@ export default function Comment() {
   let { id } = useParams();
   let dispatch = useDispatch();
 
-  let { saoCongViec, danhGia, arrComments } = useSelector((state) => {
+  let { arrComments } = useSelector((state) => {
     return state.commentsReducer;
+  });
+
+  let { detailCongViec } = useSelector((state) => {
+    return state.jobReducer;
   });
 
   let { userLogin } = useSelector((state) => {
@@ -32,23 +36,16 @@ export default function Comment() {
     let fetchDanhGiaData = () => {
       https
         .get(`/api/cong-viec/lay-cong-viec-chi-tiet/${id}`)
-        .then((res) => {
-          console.log(res.data.content);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        .then((res) => {})
+        .catch((err) => {});
     };
     let fetchBinhLuanData = () => {
       https
         .get(`/api/binh-luan/lay-binh-luan-theo-cong-viec/${id}`)
         .then((res) => {
-          console.log(res.data.content);
           dispatch(setComments(res.data.content));
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => {});
     };
     fetchDanhGiaData();
     fetchBinhLuanData();
@@ -70,21 +67,14 @@ export default function Comment() {
           },
         })
         .then((res) => {
-          console.log(res);
           https
             .get(`/api/binh-luan/lay-binh-luan-theo-cong-viec/${id}`)
             .then((res) => {
-              console.log(res.data.content);
               dispatch(setComments(res.data.content));
             })
-            .catch((err) => {
-              console.log(err);
-            });
+            .catch((err) => {});
         })
-        .catch((err) => {
-          console.log(err);
-        });
-      console.log(postComment);
+        .catch((err) => {});
     } else {
       message.warning("Yêu cầu đăng nhập!");
     }
@@ -208,13 +198,17 @@ export default function Comment() {
         <div class="review-count lg:flex lg:justify-between">
           <div class="count flex items-center">
             <h2 class="me-2 mb-1 text-gray-800 text-2xl font-bold">
-              {danhGia} Reviews
+              {detailCongViec?.congViec?.danhGia} Reviews
             </h2>
             <div className="star flex items-center">
-              <Rate disabled value={saoCongViec} style={{ color: "orange" }} />
+              <Rate
+                disabled
+                value={detailCongViec?.congViec?.saoCongViec}
+                style={{ color: "orange" }}
+              />
             </div>
             <div className="star-score font-bold text-orange-400 mx-1">
-              {saoCongViec}
+              {detailCongViec?.congViec?.saoCongViec}
             </div>
           </div>
           <div class="sort flex items-center lg:px-3 text-lg">
@@ -239,13 +233,13 @@ export default function Comment() {
                 </td>
                 <td className="process-bar-container w-full p-2">
                   <Progress
-                    percent={danhGia - 10}
+                    percent={detailCongViec?.congViec?.danhGia - 10}
                     showInfo={false}
                     strokeColor={"orange"}
                   />
                 </td>
                 <td class="star-num text-blue-500 text-lg pb-3">
-                  ({danhGia - 10})
+                  ({detailCongViec?.congViec?.danhGia - 10})
                 </td>
               </tr>
               <tr>
@@ -403,6 +397,7 @@ export default function Comment() {
             type="text"
             name="search"
             placeholder="Search reviews"
+            autoComplete="off"
           />
           <button type="button" className="bg-black rounded-r-[4px] py-2 px-4">
             <span>

@@ -1,13 +1,13 @@
 import "./App.scss";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import LoginPage from "./page/Login/LoginPage";
 import RegPage from "./page/Register/RegPage";
 import Layout from "./template/Layout";
 import HomePage from "./page/Home/HomePage";
 import Title from "./page/Title/Title";
-import Profile from "./page/Profile/Profile";
 import Categories from "./page/Categories/Categories";
 import JobDetail from "./page/JobDetail/JobDetail";
+import ProfilePage from "./page/Profile/ProfilePage";
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
           <Route
             path="/login"
             element={
@@ -41,14 +42,16 @@ function App() {
               }
             />
           </Route>
-          <Route
-            path="/profile"
-            element={
-              <Layout>
-                <Profile />
-              </Layout>
-            }
-          ></Route>
+          <Route path="/profile">
+            <Route
+              path=":id"
+              element={
+                <Layout>
+                  <ProfilePage />
+                </Layout>
+              }
+            />
+          </Route>
           <Route path="/categories">
             <Route
               path=":id"

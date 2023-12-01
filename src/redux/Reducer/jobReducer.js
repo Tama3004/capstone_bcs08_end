@@ -4,6 +4,7 @@ const initialState = {
   arrLoaiCongViec: [],
   JobRent: [],
   jobTitleDetail: [],
+  detailCongViec: [],
 };
 
 const jobReducer = createSlice({
@@ -19,9 +20,16 @@ const jobReducer = createSlice({
     getJobRent: (state, actions) => {
       state.JobRent = actions.payload;
     },
+    getDetailCongViec: (state, actions) => {
+      state.detailCongViec = actions.payload;
+    },
   },
 });
 
-export const { getMenuLoaiCongViec, getJobDetail, getJobRent } =
-  jobReducer.actions;
+export const {
+  getMenuLoaiCongViec,
+  getJobDetail,
+  getJobRent,
+  getDetailCongViec,
+} = jobReducer.actions;
 export default jobReducer.reducer;
