@@ -183,7 +183,7 @@ export default function UserInfo() {
                   {infoSeller?.avatar.length === 0 && (
                     <div className="rounded-full bg-gray-400 font-semibold text-white flex justify-center items-center w-40 h-40 border-[1px] border-gray-700">
                       <p className="uppercase">
-                        {infoSeller?.tenNguoiBinhLuan.slice(0, 1)}
+                        {infoSeller?.name.slice(0, 1)}
                       </p>
                     </div>
                   )}
