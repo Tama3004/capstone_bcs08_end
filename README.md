@@ -28,7 +28,7 @@ $ npm start
 
 - Link source: [GitHub](https://github.com/Tama3004/capstone_bcs08_end.git)
 
-- Link deploy: [chưacó](https://www.google.com)
+- Link deploy: [Surge](http://obese-heart.surge.sh)
 
 - Link youtube: [chưacó](https://www.google.com)
 
