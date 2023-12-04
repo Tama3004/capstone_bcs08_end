@@ -28,7 +28,7 @@ $ npm start
 
 - Link source: [GitHub](https://github.com/Tama3004/capstone_bcs08_end.git)
 
-- Link deploy: [Surge](http://ugly-brain.surge.sh)
+- Link deploy: [Surge](https://ugly-brain.surge.sh/)
 
 - Link youtube: [Youtube](https://www.youtube.com/watch?v=OFP1UhJV_VM)
 
